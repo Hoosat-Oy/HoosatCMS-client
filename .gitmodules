@@ -1,0 +1,3 @@
+[submodule "src/HoosatUI"]
+	path = src/HoosatUI
+	url = https://github.com/TMKCodes/HoosatUI
