@@ -33,7 +33,10 @@ export const Admin = () => {
       const result = await fetch(`${api}/authentication/authenticate`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json; charset=utf-8"
+          "Content-Type": "application/json; charset=utf-8",
+          'Accept': 'application/json',
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          'Access-Control-Allow-Credentials': 'true'
         },
         body: JSON.stringify(params),
       });
@@ -70,6 +73,9 @@ export const Admin = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json; charset=utf-8",
+          'Accept': 'application/json',
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          'Access-Control-Allow-Credentials': 'true',
           "Authorization": parsedSession.token
         },
       });
