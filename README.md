@@ -1,8 +1,45 @@
-# Getting Started with Create React App
+# Hoosat CMS Admin panel
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is Hoosat CMS admin panel which you can use in your project to manage your website content.
 
-## Available Scripts
+## Usage
+
+At Hoosat we use extensively git submodules, which is why I guide you to use git submodule.
+
+First change directory to your React Typescript project `projec/src` directory, then you
+can add the submodule and update submodules recursively.
+
+```
+git submodule https://https://github.com/Hoosat-Oy/HoosatCMS-client.git
+git submodules update --recursive
+```
+
+Afterwards in your own project you can import the `Admin` route and use it with `react-router-dom` like in the following example. 
+
+```
+import React, { useState } from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Admin } from './HoosatCMS-client';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/hoosatcms" element={<Admin />} />
+        <Route path="/hoosatcms/:page" element={<Admin />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+```
+
+## UPDATE
+
+Work on this CMS in currently ongoing, which means it is unstable and changes may happen everyday.
+
+## Basic usage of npm scripts.
 
 In the project directory, you can run:
 
