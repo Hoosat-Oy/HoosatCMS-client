@@ -5,21 +5,16 @@ import { Login } from '../Components/Login/Login';
 import { Navigation as Nav } from "../Components/Navigation/Navigation";
 
 import './Admin.scss';
+import { Pages } from './Pages/Pages';
+import { SessionDTO } from '../@types';
 
-interface Session {
-  token?: string,
-  account?: string,
-  method?: string,
-  createdAt?: string,
-  updtedAt?: string,
-  authenticate: (username: string, password: string) => any
-}
+
 
 export const Admin = () => {
 
   const location = useLocation();
 
-  const [session, setSession] = useState<Session>({
+  const [session, setSession] = useState<SessionDTO>({
     authenticate: async (email: string, password: string) => {
       if(email === undefined || password === undefined) {
         return false;
@@ -38,10 +33,11 @@ export const Admin = () => {
           "Access-Control-Allow-Origin": "http://localhost:3000",
           'Access-Control-Allow-Credentials': 'true'
         },
-        body: JSON.stringify(params),
+        body: JSON.stringify({
+          credentials: params
+        }),
       });
       const response = await result.json();
-      
       if(process.env.NODE_ENV === "development") console.log(response);
       if(response.result === "success") {
         if(response.session !== undefined) {
@@ -51,6 +47,8 @@ export const Admin = () => {
             ...response.session,
           });
         }
+      } else {
+        console.log(response.message.message)
       }
     }
   });
@@ -107,8 +105,8 @@ export const Admin = () => {
       ? <PageBuilder className='admin' style={{ minHeight: "100vh"}}
           navigation={<Nav></Nav>}
           content={
-            (location.pathname === "/admin/") 
-            ? <></>
+            (location.pathname === "/hoosatcms/pages") 
+            ? <Pages session={session}></Pages>
             : <></>
           }
           footer={<div></div>} 
