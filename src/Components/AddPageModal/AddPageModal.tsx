@@ -1,24 +1,12 @@
 import { TFunction } from 'i18next';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SessionDTO } from '../../@types';
+import { PagesDTO, SessionDTO } from '../../@types';
 import { Button, FormBuilder, InputBuilder, Message, Modal, ModalBody, ModalFooter, ModalHeader } from '../../HoosatUI';
+import { iconNames } from '../Icons/Icons';
 
 import "./AddPageModal.scss";
 
-
-interface PagesDTO {
-  _id?: string;
-  group?: string;
-  author?: string;
-  name?: string;
-  link?: string;
-  markdown?: string;
-  icon?: string;
-  domain?: string;
-  createdAt?: Date,
-  updatedAt?: Date,
-}
 
 interface AddPageModalProps {
   setShowModal: Dispatch<SetStateAction<boolean>>
@@ -33,6 +21,7 @@ interface CreatePageProps {
 }
 
 const createPage = async ({ session, page, setMsg, t }: CreatePageProps) => {
+  page.domain = window.location.hostname;
   if(session.token === undefined) {
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
     return;
@@ -113,9 +102,10 @@ export const AddPageModal: React.FC<AddPageModalProps> = ({ setShowModal, sessio
               itype: "combobox",
               id: "icon",
               label: `${t('pages.add-page-modal.icon-combobox')}`,
-              options: ["Icon 1", "Icon 2"],
+              options: iconNames,
               multiple: false,
-              onChange: (e: React.BaseSyntheticEvent) => {
+              search: true,
+              onSelect: (e: React.BaseSyntheticEvent) => {
                 setPage({
                   ...page,
                   icon: e.target.value
@@ -147,19 +137,6 @@ export const AddPageModal: React.FC<AddPageModalProps> = ({ setShowModal, sessio
                 });
               },
               value: page.markdown
-            },
-            {
-              itype: "input",
-              id: "domain",
-              label: `${t('pages.add-page-modal.domain-input')}`,
-              type: "text",
-              onChange: (e: React.BaseSyntheticEvent) => {
-                setPage({
-                  ...page,
-                  domain: e.target.value
-                });
-              },
-              value: page.domain
             }
           ]} submitbuttontext={`${t('pages.add-page-modal.submit-button')}`} onSubmit={() => { createPage({session, page, setMsg, t})}} />
           {msg.message !== "" && <Message message={msg.message} type={msg.type} />}

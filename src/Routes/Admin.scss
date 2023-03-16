@@ -2,6 +2,7 @@
   display: grid;
   gap: 20px;
   grid-template-columns: 1fr;
+  grid-template-rows: 71px auto auto;
   grid-template-areas:
     "navigation"
     "content"
@@ -31,6 +32,7 @@
 @media (min-width: 768px) {
   .admin {
     grid-template-columns: auto 2fr ;
+    grid-template-rows: auto auto;
     grid-template-areas:
       "navigation     content   "
       "navigation     footer    ";
@@ -47,6 +49,7 @@
 @media (min-width: 1280px) {
   .admin {
     grid-template-columns: auto 2fr ;
+    grid-template-rows: auto auto;
     grid-template-areas:
       "navigation     content   "
       "navigation     footer    ";
