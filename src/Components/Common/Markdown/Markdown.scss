@@ -1,0 +1,83 @@
+.gfm {
+  white-space: normal !important;
+  word-wrap: normal !important;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+
+  /* Set color for text and links */
+  color: #333;
+}
+.gfm h1,
+.gfm h2,
+.gfm h3,
+.gfm h4,
+.gfm h5,
+.gfm h6 {
+  /* Set font sizes and weights for headings */
+  font-weight: bold;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+.gfm h1 {
+  font-size: 2em;
+}
+.gfm h2 {
+  font-size: 1.5em;
+}
+.gfm h3 {
+  font-size: 1.17em;
+}
+.gfm h4 {
+  font-size: 1em;
+}
+.gfm h5 {
+  font-size: 0.83em;
+}
+.gfm h6 {
+  font-size: 0.67em;
+}
+.gfm p {
+  /* Set margin and padding for paragraphs */
+  margin-top: 0;
+  margin-bottom: 1em;
+  padding: 0;
+}
+.gfm a {
+  /* Set color and underline for links */
+  color: #0366d6;
+  text-decoration: none;
+}
+.gfm a:hover {
+  /* Set hover color for links */
+  color: #0366d6;
+  text-decoration: underline;
+}
+.gfm ul,
+.gfm ol {
+  /* Set margin and padding for lists */
+  margin-top: 0;
+  margin-bottom: 1em;
+  padding-left: 2em;
+}
+.gfm li {
+  /* Set margin for list items */
+  margin-bottom: 0.5em;
+}
+.gfm code {
+  /* Set styles for inline code */
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 0.9em;
+  padding: 0.2em 0.4em;
+}
+.gfm pre {
+  /* Set styles for code blocks */
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin-bottom: 1em;
+  padding: 1em;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}

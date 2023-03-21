@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { PagesDTO, SessionDTO } from '../../@types';
 import { AddPageModal } from '../../Components/AddPageModal/AddPageModal';
-import { Button, Grid, GridItem, Heading, List, ListItem, PageBuilder, TableBuilder } from '../../HoosatUI/src';
+import { MarkdownEditor } from '../../Components/MarkdownEditor/MarkdownEditor';
+import { Button, Flex, Grid, GridItem, Heading, List, ListItem, PageBuilder, TableBuilder } from '../../HoosatUI/src';
 
 import "./Pages.scss";
 
@@ -63,6 +64,7 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
           </List>
         }
         content={
+          <Flex>
           <TableBuilder headers={["NAME", "URL", "ICON", "DOMAIN", "MODIFY", "DELETE"]} 
             rows={(pages !== undefined) ? pages.map(page => ({
                 _id: (page._id !== undefined) ? page._id : "",
@@ -86,6 +88,17 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
               ): []
             } 
           />
+          {/* <MarkdownEditor 
+            actions={
+              <Button>LOLLERO</Button>
+            }
+            labels={{
+              header: "Otsikko",
+              markdown: "Editori"
+            }}
+          />  */}
+          
+          </Flex>
         }
       />
       { addPageModalOpen === true && <AddPageModal setShowModal={setAddPageModalOpen} session={props.session}></AddPageModal> }

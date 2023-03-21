@@ -1,0 +1,48 @@
+.markdownEditor {
+  width: 100%;
+  max-width: 100%;
+  gap: 1rem;
+  margin: 1rem;
+  grid-template-columns: 1fr 1fr ;
+  grid-template-areas:
+  "editorHeader       editorHeader"
+  "editorLabel        editorLabel"
+  "editorTools        editorTools"
+  "editorTextarea     editorViewer"
+  "editorActions      editorActions";
+
+  & > .editorHeader {
+    grid-area: editorHeader;
+    display: grid;
+    gap: 1rem;
+  }
+
+  & > .editorLabel {
+    grid-area: editorLabel;
+    & > p {
+      padding: 0px;
+      margin: 0px;
+    }
+  }
+
+  & > .editorTools {
+    grid-area: editorTools;
+  }
+
+  & > .editorTextarea {
+    grid-area: editorTextarea;
+    min-height: 500px;
+    resize: vertical;
+  }
+
+  & > .editorViewer {
+    grid-area: editorViewer;
+    min-height: 500px;
+    word-break: break-word;
+  }
+
+  & > .editorActions {
+    grid-area: editorActions;
+  }
+}
+

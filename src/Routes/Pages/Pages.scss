@@ -58,6 +58,7 @@
     "navigation     content   "
     "footer         footer    ";
     & > .navigation {
+      grid-area: navigation;
       height: auto;
       & > ul {
         flex-direction: column;
