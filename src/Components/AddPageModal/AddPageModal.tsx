@@ -2,7 +2,7 @@ import { TFunction } from 'i18next';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PagesDTO, SessionDTO } from '../../@types';
-import { Button, FormBuilder, InputBuilder, Message, Modal, ModalBody, ModalFooter, ModalHeader } from '../../HoosatUI';
+import { Button, FormBuilder, Heading, InputBuilder, Message, Modal, ModalBody, ModalFooter, ModalHeader } from '../../HoosatUI';
 import { iconNames } from '../../HoosatUI/src/Icons/Icons';
 
 import "./AddPageModal.scss";
@@ -68,7 +68,7 @@ export const AddPageModal: React.FC<AddPageModalProps> = ({ setShowModal, sessio
     group: "",
     author: "",
     name: "",
-    link: "",
+    link: "/index",
     markdown: "",
     icon: "",
     domain: ""
@@ -93,7 +93,8 @@ export const AddPageModal: React.FC<AddPageModalProps> = ({ setShowModal, sessio
               onChange: (e: React.BaseSyntheticEvent) => {
                 setPage({
                   ...page,
-                  name: e.target.value
+                  name: e.target.value,
+                  link: "/" + encodeURI(e.target.value.replaceAll(".", ""))
                 });
               },
               value: page.name
@@ -139,7 +140,8 @@ export const AddPageModal: React.FC<AddPageModalProps> = ({ setShowModal, sessio
               value: page.markdown
             }
           ]} submitbuttontext={`${t('pages.add-page-modal.submit-button')}`} onSubmit={() => { createPage({session, page, setMsg, t})}} />
-          {msg.message !== "" && <Message message={msg.message} type={msg.type} />}
+          { page.link === "/index" && <Message message={t('pages.add-page-modal.info-message')} type={'Info'}></Message> }
+          { msg.message !== "" && <Message message={msg.message} type={msg.type} />}
       </ModalBody>
       <ModalFooter>
         <Button onClick={() => setShowModal(false)}>{t("pages.add-page-modal.close")}</Button>

@@ -63,7 +63,7 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
           </List>
         }
         content={
-          <TableBuilder headers={["NAME", "URL", "ICON", "DOMAIN"]} 
+          <TableBuilder headers={["NAME", "URL", "ICON", "DOMAIN", "MODIFY", "DELETE"]} 
             rows={(pages !== undefined) ? pages.map(page => ({
                 _id: (page._id !== undefined) ? page._id : "",
                 selected: (selectedLine === page._id),
@@ -72,6 +72,12 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
                   link: page.link,
                   icon: page.icon,
                   domain: page.domain,
+                  modify: <Button onClick={() => {
+                    // TODO: Delete page.
+                  }}>{t("pages.modify-page-button")}</Button>,
+                  delete: <Button onClick={() => {
+                    // TODO: Delete page.
+                  }}>{t("pages.delete-page-button")}</Button>
                 },
                 onClick: () => {
                   setSelectedLine((page._id !== undefined) ? page._id: "");
