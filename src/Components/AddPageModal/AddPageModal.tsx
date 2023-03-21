@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PagesDTO, SessionDTO } from '../../@types';
 import { Button, FormBuilder, InputBuilder, Message, Modal, ModalBody, ModalFooter, ModalHeader } from '../../HoosatUI';
-import { iconNames } from '../Common/Icons/Icons';
+import { iconNames } from '../../HoosatUI/src/Icons/Icons';
 
 import "./AddPageModal.scss";
 
