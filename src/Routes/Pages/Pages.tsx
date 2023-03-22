@@ -5,6 +5,7 @@ import { PagesDTO, SessionDTO } from '../../@types';
 import { AddPageModal } from '../../Components/AddPageModal/AddPageModal';
 import { MarkdownEditor } from '../../Components/MarkdownEditor/MarkdownEditor';
 import { Button, Flex, Grid, GridItem, Heading, List, ListItem, PageBuilder, TableBuilder } from '../../HoosatUI/src';
+import { Icons } from '../../HoosatUI/src/Icons/Icons';
 
 import "./Pages.scss";
 
@@ -65,16 +66,19 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
         }
         content={
           <Flex>
-          <TableBuilder headers={["NAME", "URL", "ICON", "DOMAIN", "MODIFY", "DELETE"]} 
+          <TableBuilder headers={["NAME", "URL", "ICON", "DOMAIN", "MODIFY", "CONTENT", "DELETE"]} 
             rows={(pages !== undefined) ? pages.map(page => ({
                 _id: (page._id !== undefined) ? page._id : "",
                 selected: (selectedLine === page._id),
                 data: {
                   name: page.name,
                   link: page.link,
-                  icon: page.icon,
+                  icon: <Icons icon={(page.icon !== undefined) ? page.icon : ""} type={'outline'} style={{ width: "24px"}}></Icons>,
                   domain: page.domain,
                   modify: <Button onClick={() => {
+                    // TODO: Delete page.
+                  }}>{t("pages.modify-page-button")}</Button>,
+                  modifyContent: <Button onClick={() => {
                     // TODO: Delete page.
                   }}>{t("pages.modify-page-button")}</Button>,
                   delete: <Button onClick={() => {

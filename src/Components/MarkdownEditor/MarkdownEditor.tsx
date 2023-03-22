@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Grid, GridItem, Input, Paragraph, Select, Textarea } from '../../HoosatUI';
 import { Markdown } from '../Common/Markdown/Markdown';
 
@@ -27,6 +27,8 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
       ? rest.document
       : { header: "", markdown: "" }
   );
+
+
   return (
     <Grid className="markdownEditor">
       <GridItem className="editorHeader">
@@ -39,82 +41,105 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
           }}
         />
       </GridItem>
-      <GridItem className='editorLabel'>
+      <GridItem className='editorLabel' >
         <Paragraph>{rest.labels?.markdown}</Paragraph>
       </GridItem>
       <GridItem className="editorTools">
-        <Button
-          onClick={() => {
+        { [1,2,3,4,5,6].map(h => (
+          <Button onClick={(e) => {
+            e.preventDefault();
             setDocument({
               ...document,
-              markdown: document.markdown + "```\r\n\r\n```\r\n"
+              markdown: document.markdown + "\r\n" + "#".repeat(h) + " header"
             });
           }}>
-          CODE
+            H{h}
+          </Button>
+        ))}
+        <Button onClick={() => {
+            setDocument({
+              ...document,
+              markdown: document.markdown + "\r\n**BOLD**"
+            });
+          }}>
+          Bold
         </Button>
-        <Button
-          onClick={() => {
+        <Button onClick={() => {
             setDocument({
               ...document,
-              markdown: document.markdown + "\r\n# "
+              markdown: document.markdown + "\r\n*ITALIC*"
             });
           }}>
-          H1
+          Italic
         </Button>
-
-        <Button
-          onClick={() => {
+        <Button onClick={() => {
             setDocument({
               ...document,
-              markdown: document.markdown + "\r\n## "
+              markdown: document.markdown + "\r\n***BOLD ITALIC***"
             });
           }}>
-          H2
+          Bold Italic
         </Button>
-
-        <Button
-          onClick={() => {
+        <Button onClick={() => {
             setDocument({
               ...document,
-              markdown: document.markdown + "\r\n### "
+              markdown: document.markdown + "\r\n~~Strikethrough~~"
             });
           }}>
-          H3
+          Strikethrough
         </Button>
-
-        <Button
-          onClick={() => {
+        <Button onClick={() => {
             setDocument({
               ...document,
-              markdown: document.markdown + "\r\n#### "
+              markdown: document.markdown + "\r\n> Quote"
             });
           }}>
-          H4
+          Quote
         </Button>
-
-        <Button
-          onClick={() => {
+        <Button onClick={() => {
             setDocument({
               ...document,
-              markdown: document.markdown + "\r\n##### "
+              markdown: document.markdown + "\r\n```\r\n\r\n```\r\n"
             });
           }}>
-          H5
+          Code
         </Button>
-
-        <Button
-          onClick={() => {
+        <Button onClick={() => {
             setDocument({
               ...document,
-              markdown: document.markdown + "\r\n###### "
+              markdown: document.markdown + "\r\n|  |  |\r\n|--|--|\r\n|  |  |"
             });
           }}>
-          H6
+          Table
+        </Button>
+        <Button onClick={() => {
+            setDocument({
+              ...document,
+              markdown: document.markdown + "\r\n|  |  |"
+            });
+          }}>
+          Row
+        </Button>
+        <Button onClick={() => {
+            setDocument({
+              ...document,
+              markdown: document.markdown + "\r\n[ALT](URL)"
+            });
+          }}>
+          Link
+        </Button>
+        <Button onClick={() => {
+            setDocument({
+              ...document,
+              markdown: document.markdown + "\r\n![ALT](https://hoosat.fi/logo512.png)"
+            });
+          }}>
+          Image
         </Button>
       </GridItem>
       <Textarea className="editorTextarea"
+        autoFocus={true}
         value={document.markdown}
-        title="Github flavored markdown!"
         onChange={(e: React.BaseSyntheticEvent) => {
           setDocument({
             ...document,

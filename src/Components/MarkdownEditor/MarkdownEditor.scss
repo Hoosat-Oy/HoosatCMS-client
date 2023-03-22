@@ -27,6 +27,27 @@
 
   & > .editorTools {
     grid-area: editorTools;
+    max-width: 50%;
+    margin-bottom: -1rem;
+    border-radius: 0.375rem;
+    & > button {
+      border-radius: 0rem;
+      border: 0px;
+
+      &:hover {
+        outline: none;
+        box-shadow: none;
+      }
+  
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+  
+      &:active {
+        outline: none;
+      }
+    }
   }
 
   & > .editorTextarea {

@@ -126,18 +126,6 @@ export const AddPageModal: React.FC<AddPageModalProps> = ({ setShowModal, sessio
                 });
               },
               value: page.link
-            },
-            {
-              itype: "textarea",
-              id: "markdown",
-              label: `${t('pages.add-page-modal.markdown-textarea')}`,
-              onChange: (e: React.BaseSyntheticEvent) => {
-                setPage({
-                  ...page,
-                  markdown: e.target.value
-                });
-              },
-              value: page.markdown
             }
           ]} submitbuttontext={`${t('pages.add-page-modal.submit-button')}`} onSubmit={() => { createPage({session, page, setMsg, t})}} />
           { page.link === "/index" && <Message message={t('pages.add-page-modal.info-message')} type={'Info'}></Message> }
