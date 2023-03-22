@@ -22,6 +22,7 @@ interface markdownEditorProps {
 }
 
 export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [document, setDocument] = useState<Document>(
     (rest.document !== undefined)
       ? rest.document
@@ -47,11 +48,11 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
       <GridItem className="editorTools">
         { [1,2,3,4,5,6].map(h => (
           <Button onClick={(e) => {
-            e.preventDefault();
             setDocument({
               ...document,
               markdown: document.markdown + "\r\n" + "#".repeat(h) + " header"
             });
+            textareaRef.current?.focus();
           }}>
             H{h}
           </Button>
@@ -61,6 +62,7 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
               ...document,
               markdown: document.markdown + "\r\n**BOLD**"
             });
+            textareaRef.current?.focus();
           }}>
           Bold
         </Button>
@@ -69,6 +71,7 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
               ...document,
               markdown: document.markdown + "\r\n*ITALIC*"
             });
+            textareaRef.current?.focus();
           }}>
           Italic
         </Button>
@@ -77,6 +80,7 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
               ...document,
               markdown: document.markdown + "\r\n***BOLD ITALIC***"
             });
+            textareaRef.current?.focus();
           }}>
           Bold Italic
         </Button>
@@ -85,6 +89,7 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
               ...document,
               markdown: document.markdown + "\r\n~~Strikethrough~~"
             });
+            textareaRef.current?.focus();
           }}>
           Strikethrough
         </Button>
@@ -93,6 +98,7 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
               ...document,
               markdown: document.markdown + "\r\n> Quote"
             });
+            textareaRef.current?.focus();
           }}>
           Quote
         </Button>
@@ -101,6 +107,7 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
               ...document,
               markdown: document.markdown + "\r\n```\r\n\r\n```\r\n"
             });
+            textareaRef.current?.focus();
           }}>
           Code
         </Button>
@@ -109,6 +116,7 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
               ...document,
               markdown: document.markdown + "\r\n|  |  |\r\n|--|--|\r\n|  |  |"
             });
+            textareaRef.current?.focus();
           }}>
           Table
         </Button>
@@ -117,6 +125,7 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
               ...document,
               markdown: document.markdown + "\r\n|  |  |"
             });
+            textareaRef.current?.focus();
           }}>
           Row
         </Button>
@@ -125,6 +134,7 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
               ...document,
               markdown: document.markdown + "\r\n[ALT](URL)"
             });
+            textareaRef.current?.focus();
           }}>
           Link
         </Button>
@@ -133,11 +143,13 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
               ...document,
               markdown: document.markdown + "\r\n![ALT](https://hoosat.fi/logo512.png)"
             });
+            textareaRef.current?.focus();
           }}>
           Image
         </Button>
       </GridItem>
-      <Textarea className="editorTextarea"
+      <textarea className="editorTextarea"
+        ref={textareaRef}
         autoFocus={true}
         value={document.markdown}
         onChange={(e: React.BaseSyntheticEvent) => {
@@ -146,7 +158,7 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
             markdown: e.target.value
           });
         }}>
-      </Textarea>
+      </textarea>
       <Markdown className="editorViewer" markdown={document.markdown}></Markdown>
       <GridItem className='editorActions'>
         {rest.actions}

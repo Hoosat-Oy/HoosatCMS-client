@@ -92,7 +92,7 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
               ): []
             } 
           />
-          {/* <MarkdownEditor 
+          <MarkdownEditor 
             actions={
               <Button>LOLLERO</Button>
             }
@@ -100,7 +100,7 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
               header: "Otsikko",
               markdown: "Editori"
             }}
-          />  */}
+          /> 
           
           </Flex>
         }
