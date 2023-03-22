@@ -30,6 +30,19 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
   );
 
 
+  const addToTextarea = (element: string) => {
+    let add = "";
+    if(document.markdown !== "") {
+      add += "\r\n";
+    }
+    add += element;
+    setDocument({
+      ...document,
+      markdown: document.markdown + add 
+    })
+    textareaRef.current?.focus();
+  }
+
   return (
     <Grid className="markdownEditor">
       <GridItem className="editorHeader">
@@ -48,102 +61,58 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
       <GridItem className="editorTools">
         { [1,2,3,4,5,6].map(h => (
           <Button onClick={(e) => {
-            setDocument({
-              ...document,
-              markdown: document.markdown + "\r\n" + "#".repeat(h) + " header"
-            });
-            textareaRef.current?.focus();
+            addToTextarea("#".repeat(h) + " header");
           }}>
             H{h}
           </Button>
         ))}
         <Button onClick={() => {
-            setDocument({
-              ...document,
-              markdown: document.markdown + "\r\n**BOLD**"
-            });
-            textareaRef.current?.focus();
+            addToTextarea("**BOLD**");
           }}>
           Bold
         </Button>
         <Button onClick={() => {
-            setDocument({
-              ...document,
-              markdown: document.markdown + "\r\n*ITALIC*"
-            });
-            textareaRef.current?.focus();
+            addToTextarea("*ITALIC*");
           }}>
           Italic
         </Button>
         <Button onClick={() => {
-            setDocument({
-              ...document,
-              markdown: document.markdown + "\r\n***BOLD ITALIC***"
-            });
-            textareaRef.current?.focus();
+            addToTextarea("***BOLD ITALIC***");
           }}>
           Bold Italic
         </Button>
         <Button onClick={() => {
-            setDocument({
-              ...document,
-              markdown: document.markdown + "\r\n~~Strikethrough~~"
-            });
-            textareaRef.current?.focus();
+            addToTextarea("~~Strikethrough~~");
           }}>
           Strikethrough
         </Button>
         <Button onClick={() => {
-            setDocument({
-              ...document,
-              markdown: document.markdown + "\r\n> Quote"
-            });
-            textareaRef.current?.focus();
+            addToTextarea("> Quote");
           }}>
           Quote
         </Button>
         <Button onClick={() => {
-            setDocument({
-              ...document,
-              markdown: document.markdown + "\r\n```\r\n\r\n```\r\n"
-            });
-            textareaRef.current?.focus();
+            addToTextarea("```\r\n\r\n```\r\n");
           }}>
           Code
         </Button>
         <Button onClick={() => {
-            setDocument({
-              ...document,
-              markdown: document.markdown + "\r\n|  |  |\r\n|--|--|\r\n|  |  |"
-            });
-            textareaRef.current?.focus();
+            addToTextarea("| Th | Th |\r\n|----|----|\r\n| Td | Td |");
           }}>
           Table
         </Button>
         <Button onClick={() => {
-            setDocument({
-              ...document,
-              markdown: document.markdown + "\r\n|  |  |"
-            });
-            textareaRef.current?.focus();
+            addToTextarea("| Td | Td |");
           }}>
           Row
         </Button>
         <Button onClick={() => {
-            setDocument({
-              ...document,
-              markdown: document.markdown + "\r\n[ALT](URL)"
-            });
-            textareaRef.current?.focus();
+            addToTextarea("[text](url)");
           }}>
           Link
         </Button>
         <Button onClick={() => {
-            setDocument({
-              ...document,
-              markdown: document.markdown + "\r\n![ALT](https://hoosat.fi/logo512.png)"
-            });
-            textareaRef.current?.focus();
+            addToTextarea("![ALT](https://hoosat.fi/logo512.png)");
           }}>
           Image
         </Button>

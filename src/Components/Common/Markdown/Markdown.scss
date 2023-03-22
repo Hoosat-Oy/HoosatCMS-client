@@ -15,7 +15,6 @@
 .gfm h6 {
   /* Set font sizes and weights for headings */
   font-weight: bold;
-  margin-top: 1.5em;
   margin-bottom: 0.5em;
 }
 .gfm h1 {
@@ -80,4 +79,14 @@
   padding: 1em;
   overflow-x: auto;
   white-space: pre-wrap;
+}
+
+.gfm table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.gfm table, th, td {
+  height: 16px;
+  border: 1px solid black;
 }
