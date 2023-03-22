@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { PagesDTO, SessionDTO } from '../../@types';
 import { AddPageModal } from '../../Components/AddPageModal/AddPageModal';
 import { MarkdownEditor } from '../../Components/MarkdownEditor/MarkdownEditor';
-import { Button, Flex, Heading, List, ListItem, PageBuilder, TableBuilder } from '../../HoosatUI/src';
-import { Icons } from '../../HoosatUI/src/Icons/Icons';
+import { Icons, Button, Flex, Heading, List, ListItem, PageBuilder, TableBuilder  } from '../../HoosatUI/';
 
 import "./Pages.scss";
 

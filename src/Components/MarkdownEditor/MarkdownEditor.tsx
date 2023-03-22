@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Grid, GridItem, Input, Paragraph, Select, Textarea } from '../../HoosatUI';
-import { Markdown } from '../Common/Markdown/Markdown';
+import { Markdown } from '../../HoosatUI/';
 
 import "./MarkdownEditor.scss";
 
@@ -28,7 +28,6 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
       ? rest.document
       : { header: "", markdown: "" }
   );
-
 
   const addToTextarea = (element: string) => {
     let add = "";
