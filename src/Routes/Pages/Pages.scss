@@ -29,10 +29,19 @@
   } 
 }
 
-.editor-buttons {
+.flex-table {
   gap: 1rem;
-  grid-template-columns: auto auto;
 }
+
+.editor-actions {
+  grid-template-rows: auto auto;
+  gap: 1rem;
+  & > .editor-buttons {
+    grid-template-columns: auto auto;
+  }
+}
+
+
 
 @media (min-width: 768px) {
   .pages {

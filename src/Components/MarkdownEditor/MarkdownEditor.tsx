@@ -4,53 +4,68 @@ import { Markdown } from '../../HoosatUI/';
 
 import "./MarkdownEditor.scss";
 
-interface Document {
-  header: string,
-  markdown: string,
+export interface MarkdownDocument {
+  header: string | undefined,
+  markdown: string | undefined,
 }
 
-interface DocumentLabels {
+interface MarkdownDocumentLabels {
   header: string,
   markdown: string,
 }
 
 interface markdownEditorProps {
-
   actions: JSX.Element[] | JSX.Element;
-  document?: Document;
-  labels?: DocumentLabels;
+  markdownDocument: MarkdownDocument | undefined,
+  setMarkdownDocument: React.Dispatch<React.SetStateAction<MarkdownDocument>> 
+  labels?: MarkdownDocumentLabels;
 }
 
 export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [document, setDocument] = useState<Document>(
-    (rest.document !== undefined)
-      ? rest.document
-      : { header: "", markdown: "" }
-  );
 
   const addToTextarea = (element: string) => {
     let add = "";
-    if(document.markdown !== "") {
+    if(rest.markdownDocument === undefined) {
+      return;
+    }
+    if(rest.markdownDocument.markdown !== "") {
       add += "\r\n";
     }
     add += element;
-    setDocument({
-      ...document,
-      markdown: document.markdown + add 
+    rest.setMarkdownDocument({
+      ...rest.markdownDocument,
+      markdown: rest.markdownDocument.markdown + add 
     })
     textareaRef.current?.focus();
+  }
+
+  const updateHeader = (value: string) => {
+    if(rest.markdownDocument === undefined) {
+      return;
+    }
+    rest.setMarkdownDocument({
+      ...rest.markdownDocument,
+      header: value
+    });
+  }
+
+  const updateMarkdown = (value: string) => {
+    if(rest.markdownDocument === undefined) {
+      return;
+    }
+    rest.setMarkdownDocument({
+      ...rest.markdownDocument,
+      markdown: value
+    });
   }
 
   return (
     <Grid className="markdownEditor">
       <GridItem className="editorHeader">
-        <Input label={rest.labels?.header} value={document.header}
+        <Input label={rest.labels?.header} value={rest.markdownDocument?.header}
           onChange={(e: React.BaseSyntheticEvent) => {
-            setDocument({
-              ...document,
-              header: e.target.value
-            });
+            updateHeader(e.target.value);
           }}
         />
       </GridItem>
@@ -119,15 +134,12 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
       <textarea className="editorTextarea"
         ref={textareaRef}
         autoFocus={true}
-        value={document.markdown}
+        value={rest.markdownDocument?.markdown}
         onChange={(e: React.BaseSyntheticEvent) => {
-          setDocument({
-            ...document,
-            markdown: e.target.value
-          });
+          updateMarkdown(e.target.value);
         }}>
       </textarea>
-      <Markdown className="editorViewer" markdown={document.markdown}></Markdown>
+      <Markdown className="editorViewer" markdown={(rest.markdownDocument?.markdown !== undefined) ? rest.markdownDocument?.markdown : "" }></Markdown>
       <GridItem className='editorActions'>
         {rest.actions}
       </GridItem>
