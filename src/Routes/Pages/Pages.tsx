@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { PagesDTO, SessionDTO } from '../../@types';
 import { AddPageModal } from '../../Components/AddPageModal/AddPageModal';
 import { MarkdownEditor } from '../../Components/MarkdownEditor/MarkdownEditor';
-import { Icons, Button, Flex, Heading, List, ListItem, PageBuilder, TableBuilder  } from '../../HoosatUI/';
+import { Icons, Button, Flex, Heading, List, ListItem, PageBuilder, TableBuilder, Grid  } from '../../HoosatUI/';
 
 import "./Pages.scss";
 
@@ -105,9 +105,6 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
     { (selectedComponent === "editor") && 
       <Flex>
         <MarkdownEditor 
-          actions={
-            <Button>LOLLERO</Button>
-          }
           labels={{
             header: "Otsikko",
             markdown: "Editori"
@@ -116,6 +113,14 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
             header: (selectedPage?.name !== undefined) ? selectedPage.name : "", 
             markdown: (selectedPage?.markdown !== undefined) ? selectedPage.markdown : "" 
           }}
+          actions={
+            <Grid className='editor-buttons'>
+              <Button onClick={() => {
+                  setSelectedComponent("table")
+                }}>{t("pages.editor.back-button")}</Button>
+              <Button onClick={() => {}}>{t("pages.editor.save-button")}</Button>
+            </Grid>
+          }
         /> 
       </Flex>
     }

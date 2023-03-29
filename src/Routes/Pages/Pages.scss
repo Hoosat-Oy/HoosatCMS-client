@@ -26,7 +26,12 @@
         padding: 0px;
       }
     }
-  }
+  } 
+}
+
+.editor-buttons {
+  gap: 1rem;
+  grid-template-columns: auto auto;
 }
 
 @media (min-width: 768px) {
