@@ -85,7 +85,6 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
     if(process.env.NODE_ENV === "development") console.log(response);
     if(response.result === "success") {
       setSelectedComponent("table");
-      getPagesByDomain()
       setMessage({ type: "Success", message: `${t("pages.update-success-message")}`});
     } else {
       setMessage({ type: "Error", message: `${t("pages.update-error-message")}`});
@@ -113,7 +112,7 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
     const response = await fetchResult.json();
     if(process.env.NODE_ENV === "development") console.log(response);
     if(response.result === "success") {
-      getPagesByDomain();
+      getPagesByDomain()
       setSelectedComponent("table");
       setMessage({ type: "Success", message: `${t("pages.delete.success-message")}`});
     } else {
@@ -138,6 +137,8 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
     }
     moveUpPage.order = moveUpPage.order - 1;
     moveDownPage.order = moveDownPage.order + 1;
+    pages[index] = moveDownPage;
+    pages[index-1] = moveUpPage;
     await updatePage(props.session, moveUpPage);
     await updatePage(props.session, moveDownPage);
   }
