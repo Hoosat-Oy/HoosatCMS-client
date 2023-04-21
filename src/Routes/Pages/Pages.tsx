@@ -56,15 +56,19 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
     fetchPages();
   }, []);
 
-  const updatePage = async (session: SessionDTO, page: PagesDTO, markdownDocument: MarkdownDocument) => {
+  const updatePageMarkdown = async (session: SessionDTO, page: PagesDTO, markdownDocument: MarkdownDocument) => {
+    page.name = markdownDocument.header;
+    page.markdown = markdownDocument.markdown;
+    await updatePage(session, page);
+  }
+
+  const updatePage = async (session: SessionDTO, page: PagesDTO) => {
     const api = process.env.REACT_APP_AUTHENTICATION_API;
     if(api === undefined) {
       if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
       return;
     }
     const uri = `${api}/pages/`;
-    page.name = markdownDocument.header;
-    page.markdown = markdownDocument.markdown;
     const fetchResult = await fetch(uri, {
       method: "PUT",
       headers: {
@@ -81,9 +85,10 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
     if(process.env.NODE_ENV === "development") console.log(response);
     if(response.result === "success") {
       setSelectedComponent("table");
-      setMessage({ type: "Success", message: `${t("pages.editor.success-message")}`});
+      getPagesByDomain()
+      setMessage({ type: "Success", message: `${t("pages.update-success-message")}`});
     } else {
-      setMessage({ type: "Error", message: `${t("pages.editor.error-message")}`});
+      setMessage({ type: "Error", message: `${t("pages.update-error-message")}`});
     }
   }
 
@@ -118,6 +123,29 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
 
   useEffect(getPagesByDomain, [addPageModalOpen]);
 
+  const movePageUp = async (index: number, pages: PagesDTO[]) => {
+    if(index <= 0) {
+      setMessage({ type: "Success", message: `${t("pages.page-is-already-first-page")}`});
+      return;
+    }
+    let moveUpPage = pages[index];
+    let moveDownPage = pages[index-1];
+    if(moveUpPage.order == undefined) {
+      return;
+    }
+    if(moveDownPage.order == undefined) {
+      return;
+    }
+    moveUpPage.order = moveUpPage.order - 1;
+    moveDownPage.order = moveDownPage.order + 1;
+    await updatePage(props.session, moveUpPage);
+    await updatePage(props.session, moveDownPage);
+  }
+
+  function movePageDown(index: number, pages: PagesDTO[]) {
+    movePageUp(index + 1, pages);
+  }
+
   return (
     <>
     { (selectedComponent === "table") &&
@@ -134,11 +162,20 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
         }
         content={
           <Flex className='flex-table'>
-              <TableBuilder headers={["NAME", "URL", "ICON", "DOMAIN", "CONTENT", "DELETE"]} 
-                rows={(pages !== undefined) ? pages.map(page => ({
+              <TableBuilder headers={["ORDER", "NAME", "URL", "ICON", "DOMAIN", "CONTENT", "DELETE"]} 
+                rows={(pages !== undefined) ? pages.map((page, index, pages) => ({
                   _id: (page._id !== undefined) ? page._id : "",
                   selected: (selectedLine === page._id),
                   data: {
+                    order: <>
+                      <Button style={{ marginRight: "1rem" }} onClick={() => {
+                        movePageUp(index, pages);
+                      }}><Icons icon={'arrow-up'} type={'outline'} style={{ width: "16px"}}/></Button>
+                      {page.order}
+                      <Button style={{ marginLeft: "1rem" }} onClick={() => {
+                        movePageDown(index, pages);
+                      }}><Icons icon={'arrow-down'} type={'outline'} style={{ width: "16px"}}/></Button>
+                    </>,
                     name: page.name,
                     link: page.link,
                     icon: <Icons icon={(page.icon !== undefined) ? page.icon : ""} type={'outline'} style={{ width: "24px"}}></Icons>,
@@ -149,7 +186,6 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
                       setMarkdownDocument({ header: page.name, markdown: page.markdown})
                       setSelectedComponent("editor");
                     }}>{t("pages.modify-page-button")}</Button>,
-                    
                     delete: <Button onClick={() => {
                       // TODO: Delete page.
                       deletePage(props.session, page);
@@ -187,7 +223,7 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
                   {t("pages.editor.back-button")}
                 </Button>
                 <Button onClick={() => { 
-                    updatePage(props.session, selectedPage, markdownDocument); 
+                    updatePageMarkdown(props.session, selectedPage, markdownDocument); 
                   }}>
                   {t("pages.editor.save-button")}
                 </Button>

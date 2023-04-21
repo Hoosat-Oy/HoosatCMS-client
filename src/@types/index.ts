@@ -11,6 +11,7 @@ export interface PagesDTO {
   _id?: string;
   group?: string;
   author?: string;
+  order?: number;
   name?: string;
   link?: string;
   markdown?: string;
