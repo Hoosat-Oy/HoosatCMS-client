@@ -67,6 +67,12 @@ export const AddPage: React.FC<AddPageProps> = (props: AddPageProps) => {
             });
           },
           value: page.link
+        },
+        {
+          itype: "message",
+          id: "Index message",
+          message: `${t('pages.add.info-message')}`,
+          type: `info`
         }
       ]} 
       onSubmit={async () => { 

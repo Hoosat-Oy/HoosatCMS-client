@@ -29,7 +29,7 @@ export const AddArticle: React.FC<AddArticleProps> = (props: AddArticleProps) =>
       {
         itype: "input",
         id: "header",
-        label: `${t('posts.add.form-header-label')}`,
+        label: `${t('posts.add.header')}`,
         type: "text",
         onChange: (e: React.BaseSyntheticEvent) => {
           setPost({
