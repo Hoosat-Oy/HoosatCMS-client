@@ -7,7 +7,7 @@ import { Navigation as Nav } from "../Components/Navigation/Navigation";
 import './Admin.scss';
 import { Pages } from './Pages/Pages';
 import { SessionDTO } from '../@types';
-import { Posts } from './Pages/Posts';
+import { Posts } from './Posts/Posts';
 
 
 

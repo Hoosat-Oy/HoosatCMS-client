@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { SessionDTO } from '../../@types';
 import { Button, Flex, Heading, List, ListItem, PageBuilder } from '../../HoosatUI';
 import { useTranslation } from 'react-i18next';
-import { AddPost } from '../../Components/Posts/AddPost';
-import { ListPosts } from '../../Components/Posts/ListPosts';
+import { AddPost } from './AddPost';
+import { ListPosts } from './ListPosts';
 
 import "./Posts.css";
 

@@ -4,8 +4,8 @@ import { PageDTO, SessionDTO } from '../../@types';
 import { Button, Flex, Grid, Heading, List, ListItem, PageBuilder,   } from '../../HoosatUI/';
 
 import "./Pages.css";
-import { AddPage } from '../../Components/Pages/AddPage';
-import { ListPages } from '../../Components/Pages/ListPages';
+import { AddPage } from './AddPage';
+import { ListPages } from './ListPages';
 import { MarkdownDocument, MarkdownEditor } from '../../Components/MarkdownEditor/MarkdownEditor';
 import { UpdatePage } from '../../Controllers/Posts/Pages';
 
