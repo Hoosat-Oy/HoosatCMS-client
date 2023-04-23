@@ -1,0 +1,108 @@
+@import '../../HoosatUI/src/theme.css';
+
+.pages {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "navigation"
+    "content";  
+}
+
+.pages > .header {
+  grid-area: header;
+}
+
+.pages > .header > h1 {
+  color: var(--primary-color);
+  padding: 0px;
+}
+
+.pages > .header > h1:hover {
+  color: var(--primary-color-light);
+}
+
+.pages > .content {
+  grid-area: content;
+}
+
+.pages > .navigation {
+  grid-area: navigation;
+  height: fit-content;
+} 
+
+.pages > .navigation > .List {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  gap: 1rem;
+}
+
+.pages > .navigation > .List > .ListItem {
+  padding: 0px;
+
+}
+
+.pages > .navigation > .List > .ListItem > .Button {
+  width: 100%;
+}
+
+.flex-table {
+  gap: 1rem;
+}
+
+.editor-actions {
+  grid-template-rows: auto auto;
+  gap: 1rem;
+}
+
+.editor-actions > .editor-buttons {
+  grid-template-columns: auto auto;
+}
+
+.order-buttons {
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+
+@media (min-width: 768px) {
+  .pages {
+    padding: 0rem;
+    margin-right: 1rem;
+    grid-template-columns: auto 2fr ;
+    grid-template-areas:
+      "header         header"
+      "navigation     content   "
+      "footer         footer    ";
+  }
+  .pages > .navigation {
+    height: auto;
+    
+  }
+  .pages > .navigation > ul {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 1280px) {
+  .pages {
+    padding: 0rem;
+    margin-right: 1rem;
+    grid-template-columns: auto 2fr ;
+    grid-template-areas:
+    "header         header"
+    "navigation     content   "
+    "footer         footer    ";
+  }
+  .pages > .navigation {
+    grid-area: navigation;
+    height: auto;
+  }
+  .pages > .navigation > ul {
+    flex-direction: column;
+  }
+}

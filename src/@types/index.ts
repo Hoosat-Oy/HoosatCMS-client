@@ -7,7 +7,7 @@ export interface SessionDTO {
   authenticate: (username: string, password: string) => any
 }
 
-export interface PagesDTO {
+export interface PageDTO {
   _id?: string;
   group?: string;
   author?: string;
@@ -19,4 +19,27 @@ export interface PagesDTO {
   domain?: string;
   createdAt?: Date,
   updatedAt?: Date,
+}
+
+export interface PostDTO {
+  _id: string;
+  group?: string;
+  author?: string;
+  header?: string;
+  markdown?: string;
+  read?: number;
+  domain?: string;
+  publish?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface MarkdownDocument {
+  header: string | undefined,
+  markdown: string | undefined,
+}
+
+export interface MarkdownDocumentLabels {
+  header: string,
+  markdown: string,
 }

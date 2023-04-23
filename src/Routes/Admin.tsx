@@ -7,6 +7,7 @@ import { Navigation as Nav } from "../Components/Navigation/Navigation";
 import './Admin.scss';
 import { Pages } from './Pages/Pages';
 import { SessionDTO } from '../@types';
+import { Posts } from './Pages/Posts';
 
 
 
@@ -107,6 +108,8 @@ export const Admin = () => {
           content={
             (location.pathname === "/hoosatcms/pages") 
             ? <Pages session={session}></Pages>
+            : (location.pathname === "/hoosatcms/articles")
+            ? <Posts session={session}></Posts>
             : <></>
           }
           footer={<div></div>} 

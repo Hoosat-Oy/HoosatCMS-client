@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Button, Grid, GridItem, Input, Paragraph, Select, Textarea } from '../../HoosatUI';
+import React, { useRef } from 'react';
+import { Button, Grid, GridItem, Input, Paragraph } from '../../HoosatUI';
 import { Markdown } from '../../HoosatUI/';
 
 import "./MarkdownEditor.scss";
@@ -9,7 +9,7 @@ export interface MarkdownDocument {
   markdown: string | undefined,
 }
 
-interface MarkdownDocumentLabels {
+export interface MarkdownDocumentLabels {
   header: string,
   markdown: string,
 }
