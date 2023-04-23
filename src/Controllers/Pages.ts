@@ -1,4 +1,4 @@
-import { PageDTO, SessionDTO } from "../../@types";
+import { PageDTO, SessionDTO } from "../@types";
 
 export const CreatePage = async (session: SessionDTO, page: PageDTO) => {
   page.domain = window.location.hostname;

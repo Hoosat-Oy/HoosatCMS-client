@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { PostDTO, SessionDTO } from '../../@types';
+import { ArticleDTO, SessionDTO } from '../../@types';
 import { FormBuilder } from '../../HoosatUI';
-import { CreatePost } from '../../Controllers/Posts/Posts';
+import { CreatePost } from '../../Controllers/Articles';
 
-interface AddPostProps {
+interface AddArticleProps {
   session: SessionDTO;
   closeComponent: () => void;
 }
 
-export const AddPost: React.FC<AddPostProps> = (props: AddPostProps) => {
+export const AddArticle: React.FC<AddArticleProps> = (props: AddArticleProps) => {
   const [ t, i18n] = useTranslation();
 
-  const [ post, setPost ] = useState<PostDTO>({
+  const [ post, setPost ] = useState<ArticleDTO>({
     _id: "",
     group: "",
     author: "",

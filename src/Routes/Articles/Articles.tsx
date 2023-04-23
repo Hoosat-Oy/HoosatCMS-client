@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
-import { MarkdownDocument, PageDTO, PostDTO, SessionDTO } from '../../@types';
-import { Button, Flex, Grid, Heading, List, ListItem, PageBuilder } from '../../HoosatUI';
+import { MarkdownDocument, ArticleDTO, SessionDTO } from '../../@types';
+import { Button, Grid, Heading, List, ListItem, PageBuilder } from '../../HoosatUI';
 import { useTranslation } from 'react-i18next';
-import { AddPost } from './AddPost';
-import { ListPosts } from './ListPosts';
+import { AddArticle } from './AddArticle';
+import { ListArticles } from './ListArticles';
 
-import "./Posts.css";
+import "./Articles.css";
 import { MarkdownEditor } from '../../Components/MarkdownEditor/MarkdownEditor';
-import { UpdatePost } from '../../Controllers/Posts/Posts';
+import { UpdatePost } from '../../Controllers/Articles';
 
-interface PostsProps {
+interface ArticlesProps {
   session: SessionDTO;
 }
 
-
-
-export const Posts: React.FC<PostsProps> = (props: PostsProps) => {
+export const Articles: React.FC<ArticlesProps> = (props: ArticlesProps) => {
   const [ t, i18n ] = useTranslation();
   const [ currentComponent, setCurrentComponent] = useState<string>("posts.list");
-  const [ currentPost, setCurrentPost ] = useState<PostDTO>({
+  const [ currentPost, setCurrentPost ] = useState<ArticleDTO>({
     _id: "",
     group: "",
     author: "",
@@ -42,15 +40,15 @@ export const Posts: React.FC<PostsProps> = (props: PostsProps) => {
         <List>
           <ListItem>
             <Button onClick={() => setCurrentComponent("posts.list")}>{t("posts.list-button")}</Button>
-          <ListItem>
           </ListItem>
+          <ListItem>
             <Button onClick={() => setCurrentComponent("posts.add")}>{t("posts.add-button")}</Button>
           </ListItem>
         </List>
       }
       content={
         (currentComponent === "posts.add") 
-        ? <AddPost 
+        ? <AddArticle 
             session={props.session} 
             closeComponent={() => {
               setCurrentComponent("posts.list")
@@ -84,9 +82,9 @@ export const Posts: React.FC<PostsProps> = (props: PostsProps) => {
             markdownDocument={markdownDocument}
             setMarkdownDocument={setMarkdownDocument}
           />
-        : <ListPosts 
+        : <ListArticles 
             session={props.session}
-            openEditor={(post: PostDTO) => {
+            openEditor={(post: ArticleDTO) => {
               setCurrentPost(post);
               setMarkdownDocument({ 
                 header: post.header,

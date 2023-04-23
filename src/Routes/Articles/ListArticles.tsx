@@ -1,18 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { PostDTO, SessionDTO } from '../../@types';
+import { ArticleDTO, SessionDTO } from '../../@types';
 import { Button, TableBuilder } from '../../HoosatUI';
-import { DeletePost, GetPostsByDomain } from '../../Controllers/Posts/Posts';
+import { DeletePost, GetPostsByDomain } from '../../Controllers/Articles';
 
-interface ListPostsProps {
+interface ListArticlesProps {
   session: SessionDTO;
-  openEditor: (page: PostDTO) => void;
+  openEditor: (page: ArticleDTO) => void;
 }
 
-export const ListPosts: React.FC<ListPostsProps> = (props: ListPostsProps) => {
+export const ListArticles: React.FC<ListArticlesProps> = (props: ListArticlesProps) => {
   const [ t, i18n] = useTranslation();
-  const [ posts, setPosts ] = useState<PostDTO[]>([]);
-  const [ selectedPost, setSelectedPost ] = useState<PostDTO>({
+  const [ posts, setPosts ] = useState<ArticleDTO[]>([]);
+  const [ selectedPost, setSelectedPost ] = useState<ArticleDTO>({
     _id: "",
     group: "",
     author: "",

@@ -1,6 +1,6 @@
-import { PostDTO, SessionDTO } from "../../@types";
+import { ArticleDTO, SessionDTO } from "../@types";
 
-export const CreatePost = async (session: SessionDTO, post: PostDTO) => {
+export const CreatePost = async (session: SessionDTO, post: ArticleDTO) => {
   post.domain = window.location.hostname;
   if(session.token === undefined) {
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
@@ -34,11 +34,11 @@ export const CreatePost = async (session: SessionDTO, post: PostDTO) => {
   }
 }
 
-export const UpdatePost = async (session: SessionDTO, post: PostDTO) => {
+export const UpdatePost = async (session: SessionDTO, post: ArticleDTO) => {
 
 }
 
-export const DeletePost = async (session: SessionDTO, post: PostDTO) => {
+export const DeletePost = async (session: SessionDTO, post: ArticleDTO) => {
 
 }
 

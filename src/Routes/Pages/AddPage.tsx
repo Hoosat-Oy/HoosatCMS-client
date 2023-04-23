@@ -3,7 +3,7 @@ import { FormBuilder } from '../../HoosatUI';
 import { useTranslation } from 'react-i18next';
 import { PageDTO, SessionDTO } from '../../@types';
 import { iconNames } from '../../HoosatUI/src/Icons/Icons';
-import { CreatePage } from '../../Controllers/Posts/Pages';
+import { CreatePage } from '../../Controllers/Pages';
 
 interface AddPageProps {
   session: SessionDTO;

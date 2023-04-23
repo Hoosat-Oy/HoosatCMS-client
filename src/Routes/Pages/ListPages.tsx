@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Grid, Icons, Input, TableBuilder } from '../../HoosatUI';
 import { PageDTO, SessionDTO } from '../../@types';
 import { useTranslation } from 'react-i18next';
-import { GetPagesByDomain, DeletePage, MovePageDown, MovePageUp, UpdatePage } from '../../Controllers/Posts/Pages';
+import { GetPagesByDomain, DeletePage, MovePageDown, MovePageUp, UpdatePage } from '../../Controllers/Pages';
 
 interface ListPagesProps {
   session: SessionDTO;

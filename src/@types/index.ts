@@ -21,7 +21,7 @@ export interface PageDTO {
   updatedAt?: Date,
 }
 
-export interface PostDTO {
+export interface ArticleDTO {
   _id: string;
   group?: string;
   author?: string;

@@ -7,7 +7,7 @@ import "./Pages.css";
 import { AddPage } from './AddPage';
 import { ListPages } from './ListPages';
 import { MarkdownDocument, MarkdownEditor } from '../../Components/MarkdownEditor/MarkdownEditor';
-import { UpdatePage } from '../../Controllers/Posts/Pages';
+import { UpdatePage } from '../../Controllers/Pages';
 
 interface PagesProps {
   session: SessionDTO;
@@ -34,7 +34,7 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
   return (
     <PageBuilder className='pages' 
       header={
-          <Heading variant="h1">{t("pages.header")}</Heading>
+        <Heading variant="h1">{t("pages.header")}</Heading>
       }
       navigation={
         <List>
@@ -68,7 +68,6 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
                 <Button 
                   key="save-button"
                   onClick={async () => { 
-                    //updatePage(props.session, selectedPage, markdownDocument); 
                     await UpdatePage(props.session, {
                       ...currentPage,
                       name: markdownDocument.header,
