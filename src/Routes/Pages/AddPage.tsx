@@ -24,12 +24,12 @@ export const AddPage: React.FC<AddPageProps> = (props: AddPageProps) => {
   });
   return (
     <FormBuilder 
-      submitbuttontext={`${t('pages.add-page-modal.submit-button')}`} 
+      submitbuttontext={`${t('pages.add.submit-button')}`} 
       inputs={[
         {
           itype: "input",
           id: "name",
-          label: `${t('pages.add-page-modal.name-input')}`,
+          label: `${t('pages.add.name-input')}`,
           type: "text",
           onChange: (e: React.BaseSyntheticEvent) => {
             setPage({
@@ -43,7 +43,7 @@ export const AddPage: React.FC<AddPageProps> = (props: AddPageProps) => {
         {
           itype: "combobox",
           id: "icon",
-          label: `${t('pages.add-page-modal.icon-combobox')}`,
+          label: `${t('pages.add.icon-combobox')}`,
           options: iconNames,
           multiple: false,
           search: true,
@@ -58,7 +58,7 @@ export const AddPage: React.FC<AddPageProps> = (props: AddPageProps) => {
         {
           itype: "input",
           id: "link",
-          label: `${t('pages.add-page-modal.link-input')}`,
+          label: `${t('pages.add.link-input')}`,
           type: "text",
           onChange: (e: React.BaseSyntheticEvent) => {
             setPage({

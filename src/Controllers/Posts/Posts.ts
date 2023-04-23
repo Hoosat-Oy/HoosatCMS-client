@@ -34,7 +34,11 @@ export const CreatePost = async (session: SessionDTO, post: PostDTO) => {
   }
 }
 
-export const UpdatePost = () => {
+export const UpdatePost = async (session: SessionDTO, post: PostDTO) => {
+
+}
+
+export const DeletePost = async (session: SessionDTO, post: PostDTO) => {
 
 }
 

@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PostDTO, SessionDTO } from '../../@types';
-import { Button, Flex, FormBuilder, TableBuilder } from '../../HoosatUI';
-import { CreatePost, GetPostsByDomain } from '../../Controllers/Posts/Posts';
+import { Button, TableBuilder } from '../../HoosatUI';
+import { DeletePost, GetPostsByDomain } from '../../Controllers/Posts/Posts';
 
 interface ListPostsProps {
   session: SessionDTO;
+  openEditor: (page: PostDTO) => void;
 }
 
 export const ListPosts: React.FC<ListPostsProps> = (props: ListPostsProps) => {
   const [ t, i18n] = useTranslation();
-
   const [ posts, setPosts ] = useState<PostDTO[]>([]);
   const [ selectedPost, setSelectedPost ] = useState<PostDTO>({
     _id: "",
@@ -22,6 +22,7 @@ export const ListPosts: React.FC<ListPostsProps> = (props: ListPostsProps) => {
     domain: "",
     publish: false,
   });
+  const [ update, setUpdate ] = useState<boolean>(false);
 
   const getPostsByDomain = useCallback(() => {
     const fetchPosts = async () => {
@@ -31,11 +32,11 @@ export const ListPosts: React.FC<ListPostsProps> = (props: ListPostsProps) => {
     fetchPosts();
   }, [])
 
-  useEffect(getPostsByDomain, []);
+  useEffect(getPostsByDomain, [update]);
 
   return (
     <TableBuilder 
-      headers={["HEADER", "PUBLISHED", "CONTENT", "PUBLISH"]} 
+      headers={["HEADER", "PUBLISHED", "UPDATED", "CREATED", "CONTENT", "PUBLISH", "DELETE"]} 
       rows={
         (Array.isArray(posts)) 
         ? posts.map((post, index, posts) => ({
@@ -44,12 +45,28 @@ export const ListPosts: React.FC<ListPostsProps> = (props: ListPostsProps) => {
           data: {
             header: post.header,
             published: (post.publish === false) ? "NOT PUBLISHED" : "PUBLISHED",
-            content: <Button onClick={() => {
+            updated: (post.updatedAt) ? (new Date(post.updatedAt)).toLocaleString() : "",
+            created: (post.createdAt) ? (new Date(post.createdAt)).toLocaleString() : "",
+            content: 
+              <Button onClick={() => {
+                setSelectedPost(post);
+                props.openEditor(post);
+              }}>{t("posts.modify-button")}</Button>,
+            publish: 
+              (post.publish === false)
+              ? <Button onClick={() => {
 
-            }}>CONTENT MODIFY BUTTON</Button>,
-            publish: <Button onClick={() => {
+                }}>{t("posts.publish-button")}</Button>
+              : (post.publish === true)
+              ? <Button onClick={() => {
 
-            }}>PUBLISH BUTTON</Button>,
+                }}>{t("posts.unpublish-button")}</Button>
+              : <></>,
+            delete:
+              <Button onClick={async () => {
+                await DeletePost(props.session, post);
+                setUpdate(!update);
+              }}>{t("posts.delete-button")}</Button>,
           },
           onClick: () => {
             setSelectedPost(post);
