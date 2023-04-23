@@ -14,7 +14,7 @@ interface ArticlesProps {
 }
 
 export const Articles: React.FC<ArticlesProps> = (props: ArticlesProps) => {
-  const [ t, i18n ] = useTranslation();
+  const [ t, ] = useTranslation();
   const [ currentComponent, setCurrentComponent] = useState<string>("posts.list");
   const [ currentPost, setCurrentPost ] = useState<ArticleDTO>({
     _id: "",
@@ -46,7 +46,7 @@ export const Articles: React.FC<ArticlesProps> = (props: ArticlesProps) => {
           </ListItem>
         </List>
       }
-      content={
+      body={
         (currentComponent === "posts.add") 
         ? <AddArticle 
             session={props.session} 

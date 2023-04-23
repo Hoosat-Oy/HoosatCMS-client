@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PageDTO, SessionDTO } from '../../@types';
-import { Button, Flex, Grid, Heading, List, ListItem, PageBuilder,   } from '../../HoosatUI/';
+import { Button, Grid, Heading, List, ListItem, PageBuilder } from '../../HoosatUI/';
 
 import "./Pages.css";
 import { AddPage } from './AddPage';
@@ -14,7 +14,7 @@ interface PagesProps {
 }
 
 export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
-  const [ t, i18n ] = useTranslation();
+  const [ t, ] = useTranslation();
   const [ currentComponent, setCurrentComponent] = useState<string>("pages.list");
   const [ currentPage, setCurrentPage ] = useState<PageDTO>({
     _id: "",
@@ -46,7 +46,7 @@ export const Pages: React.FC<PagesProps> = (props: PagesProps) => {
           </ListItem>
         </List>
       }
-      content={
+      body={
         (currentComponent === "pages.add") 
         ? <AddPage 
             session={props.session} 

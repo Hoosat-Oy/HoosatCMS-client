@@ -105,7 +105,7 @@ export const Admin = () => {
     { (session.token !== undefined) 
       ? <PageBuilder className='admin' style={{ minHeight: "100vh"}}
           navigation={<Nav></Nav>}
-          content={
+          body={
             (location.pathname === "/hoosatcms/pages") 
             ? <Pages session={session}></Pages>
             : (location.pathname === "/hoosatcms/articles")
@@ -116,7 +116,7 @@ export const Admin = () => {
         />
       : <PageBuilder className='admin' style={{ minHeight: "100vh"}}
           navigation={<></>}
-          content={<Login session={session}></Login>}
+          body={<Login session={session}></Login>}
           footer={<></>} 
         />
     }
