@@ -2,10 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Grid, Icons, Input, TableBuilder } from '../../HoosatUI';
 import { PageDTO, SessionDTO } from '../../@types';
 import { useTranslation } from 'react-i18next';
-import { GetPagesByDomain, deletePage, movePageDown, movePageUp, updatePage } from '../../Controllers/Posts/Pages';
+import { GetPagesByDomain, DeletePage, MovePageDown, MovePageUp, UpdatePage } from '../../Controllers/Posts/Pages';
 
 interface ListPagesProps {
   session: SessionDTO;
+  openEditor: (page: PageDTO) => void;
 }
 
 export const ListPages: React.FC<ListPagesProps> = (props: ListPagesProps) => {
@@ -33,12 +34,12 @@ export const ListPages: React.FC<ListPagesProps> = (props: ListPagesProps) => {
         data: {
           order: <Grid className='order-buttons'>
             <Button onClick={async () => {
-              await movePageUp(props.session, index, pages);
+              await MovePageUp(props.session, index, pages);
               setUpdate(!update)
             }}><Icons icon={'arrow-up'} type={'outline'} style={{ width: "16px"}}/></Button>
             {page.order}
             <Button onClick={async () => {
-              await movePageDown(props.session, index, pages);
+              await MovePageDown(props.session, index, pages);
               setUpdate(!update)
             }}><Icons icon={'arrow-down'} type={'outline'} style={{ width: "16px"}}/></Button>
           </Grid>,
@@ -62,14 +63,15 @@ export const ListPages: React.FC<ListPagesProps> = (props: ListPagesProps) => {
             }))
           }}/>,
           update: <Button onClick={async () => {
-            await updatePage(props.session, page);
+            await UpdatePage(props.session, page);
             setUpdate(!update)
           }}>{t("pages.update-page-button")}</Button>,
           modify: <Button onClick={() => {
             setSelectedPage(page);
+            props.openEditor(page);
           }}>{t("pages.modify-page-button")}</Button>,
           delete: <Button onClick={async () => {
-            await deletePage(props.session, page);
+            await DeletePage(props.session, page);
             setUpdate(!update)
           }}>{t("pages.delete-page-button")}</Button>
         },

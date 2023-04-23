@@ -62,7 +62,7 @@ export const GetPagesByDomain = async (session: SessionDTO, ) => {
   }
 }
 
-export const updatePage = async (session: SessionDTO, page: PageDTO) => {
+export const UpdatePage = async (session: SessionDTO, page: PageDTO) => {
   if(session.token === undefined) {
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
     return;
@@ -94,7 +94,7 @@ export const updatePage = async (session: SessionDTO, page: PageDTO) => {
   }
 }
 
-export const deletePage = async (session: SessionDTO, page: PageDTO) => {
+export const DeletePage = async (session: SessionDTO, page: PageDTO) => {
   if(session.token === undefined) {
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
     return;
@@ -123,7 +123,7 @@ export const deletePage = async (session: SessionDTO, page: PageDTO) => {
   }
 }
 
-export const movePageUp = async (session: SessionDTO, index: number, pages: PageDTO[]) => {
+export const MovePageUp = async (session: SessionDTO, index: number, pages: PageDTO[]) => {
   if(index <= 0) {
     return false;
   }
@@ -139,12 +139,12 @@ export const movePageUp = async (session: SessionDTO, index: number, pages: Page
   moveDownPage.order = moveDownPage.order + 1;
   pages[index] = moveDownPage;
   pages[index-1] = moveUpPage;
-  await updatePage(session, moveUpPage);
-  await updatePage(session, moveDownPage);
+  await UpdatePage(session, moveUpPage);
+  await UpdatePage(session, moveDownPage);
   return true;
 }
 
 
-export const movePageDown = async (session: SessionDTO, index: number, pages: PageDTO[]) => {
-  return await movePageUp(session, index + 1, pages);
+export const MovePageDown = async (session: SessionDTO, index: number, pages: PageDTO[]) => {
+  return await MovePageUp(session, index + 1, pages);
 }

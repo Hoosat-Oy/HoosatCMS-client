@@ -33,11 +33,11 @@ export const Posts: React.FC<PostsProps> = (props: PostsProps) => {
         </List>
       }
       content={
-        (currentComponent === "post.add") 
+        (currentComponent === "posts.add") 
         ? <AddPost 
             session={props.session} 
             closeComponent={() => {
-              setCurrentComponent("post.list")
+              setCurrentComponent("posts.list")
             }}
           />
         : <ListPosts 

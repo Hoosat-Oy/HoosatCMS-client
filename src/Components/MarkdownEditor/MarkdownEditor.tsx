@@ -74,8 +74,10 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
       </GridItem>
       <GridItem className="editorTools">
         { [1,2,3,4,5,6].map(h => (
-          <Button onClick={(e) => {
-            addToTextarea("#".repeat(h) + " header");
+          <Button 
+            key={h}
+            onClick={(e) => {
+              addToTextarea("#".repeat(h) + " header");
           }}>
             H{h}
           </Button>
