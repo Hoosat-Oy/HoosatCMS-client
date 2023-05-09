@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArticleDTO, SessionDTO } from '../../@types';
 import { Button, TableBuilder } from '../../HoosatUI';
-import { DeletePost, GetPostsByDomain } from '../../Controllers/Articles';
+import { DeletePost, GetPostsByDomain, PublishPost, UnpublishPost, UpdatePost } from '../../Controllers/Articles';
 
 interface ListArticlesProps {
   session: SessionDTO;
@@ -44,7 +44,7 @@ export const ListArticles: React.FC<ListArticlesProps> = (props: ListArticlesPro
           selected: (selectedPost._id === post._id),
           data: {
             header: post.header,
-            published: (post.publish === false) ? "NOT PUBLISHED" : "PUBLISHED",
+            publishedAt: (post.publishedAt && new Date(post.publishedAt).getFullYear() !== 1970) ? (new Date(post.publishedAt)).toLocaleString() : "NOT PUBLISHED",
             updated: (post.updatedAt) ? (new Date(post.updatedAt)).toLocaleString() : "",
             created: (post.createdAt) ? (new Date(post.createdAt)).toLocaleString() : "",
             content: 
@@ -54,12 +54,20 @@ export const ListArticles: React.FC<ListArticlesProps> = (props: ListArticlesPro
               }}>{t("posts.modify-button")}</Button>,
             publish: 
               (post.publish === false)
-              ? <Button onClick={() => {
-
+              ? <Button onClick={async () => {
+                  await PublishPost(props.session, {
+                    ...post,
+                    publish: true,
+                  });
+                  setUpdate(!update);
                 }}>{t("posts.publish-button")}</Button>
               : (post.publish === true)
-              ? <Button onClick={() => {
-
+              ? <Button onClick={async () => {
+                  await UnpublishPost(props.session, {
+                    ...post,
+                    publish: false,
+                  });
+                  setUpdate(!update);
                 }}>{t("posts.unpublish-button")}</Button>
               : <></>,
             delete:

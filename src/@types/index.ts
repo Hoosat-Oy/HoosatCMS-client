@@ -32,6 +32,7 @@ export interface ArticleDTO {
   publish?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+  publishedAt?: Date;
 }
 
 export interface MarkdownDocument {
