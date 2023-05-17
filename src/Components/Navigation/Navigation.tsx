@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Heading, List, ListItem, Image } from '../../HoosatUI/src';
+import { Heading, List, ListItem, Image } from '../../HoosatUI';
 
 export const Navigation = () => {
   return (

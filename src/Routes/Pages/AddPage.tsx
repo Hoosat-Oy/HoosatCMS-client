@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { FormBuilder } from '../../HoosatUI';
+import { FormBuilder, iconNames } from '../../HoosatUI';
 import { useTranslation } from 'react-i18next';
 import { PageDTO, SessionDTO } from '../../@types';
-import { iconNames } from '../../HoosatUI/src/Icons/Icons';
 import { CreatePage } from '../../Controllers/Pages';
 
 interface AddPageProps {

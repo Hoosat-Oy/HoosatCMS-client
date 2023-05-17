@@ -1,5 +1,5 @@
 import React, { FormHTMLAttributes, useState } from 'react';
-import { Flex, FormBuilder, Heading } from '../../HoosatUI/src';
+import { Flex, FormBuilder, Heading } from '../../HoosatUI';
 
 interface Session {
   token?: string,

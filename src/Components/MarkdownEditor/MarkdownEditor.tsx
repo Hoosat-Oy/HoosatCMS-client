@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-import { Button, Grid, GridItem, Input, Paragraph } from '../../HoosatUI';
-import { Markdown } from '../../HoosatUI/';
+import { Button, Grid, GridItem, Input, Paragraph, Markdown } from '../../HoosatUI';
 
 import "./MarkdownEditor.scss";
 

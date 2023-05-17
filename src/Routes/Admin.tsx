@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { PageBuilder } from "../HoosatUI/src";
+import { PageBuilder } from "../HoosatUI";
 import { Login } from '../Components/Login/Login';
 import { Navigation as Nav } from "../Components/Navigation/Navigation";
 
