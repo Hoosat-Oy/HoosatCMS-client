@@ -1,4 +1,4 @@
-import React, { FormHTMLAttributes, useState } from 'react';
+import React, { useState } from 'react';
 import { Flex, FormBuilder, Heading } from '../../HoosatUI';
 
 interface Session {
@@ -16,7 +16,6 @@ interface LoginProps {
 
 export const Login: React.FC<LoginProps> = ({
   session,
-  ...rest
 }) => {
   const [loginForm, setLoginForm] = useState({
     email: "",

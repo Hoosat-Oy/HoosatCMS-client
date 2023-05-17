@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MarkdownDocument, PageDTO, SessionDTO } from '../../@types';
-import { Button, Flex, Grid, Heading, Label, Message } from '../../HoosatUI';
+import { Button, Flex, Grid, Heading } from '../../HoosatUI';
 import { MarkdownEditor } from '../../Components/MarkdownEditor/MarkdownEditor';
 import { useTranslation } from 'react-i18next';
 
@@ -12,7 +12,7 @@ interface PageEditorProps {
 }
 
 export const PageEditor: React.FC<PageEditorProps> = (props: PageEditorProps) => {
-  const [ t, i18n ] = useTranslation();
+  const [ t ] = useTranslation();
   const [ markdownDocument, setMarkdownDocument ] = useState<MarkdownDocument>({
     header: props.page.name,
     markdown: props.page.markdown,

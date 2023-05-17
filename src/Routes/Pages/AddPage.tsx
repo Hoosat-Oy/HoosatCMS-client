@@ -10,7 +10,7 @@ interface AddPageProps {
 }
 
 export const AddPage: React.FC<AddPageProps> = (props: AddPageProps) => {
-  const [ t, i18n ] = useTranslation();
+  const [ t ] = useTranslation();
   const [ page, setPage ] = useState<PageDTO>({
     _id: "",
     group: "",

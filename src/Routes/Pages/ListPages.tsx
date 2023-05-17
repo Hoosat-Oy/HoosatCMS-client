@@ -10,7 +10,7 @@ interface ListPagesProps {
 }
 
 export const ListPages: React.FC<ListPagesProps> = (props: ListPagesProps) => {
-  const [ t, i18n ] = useTranslation();
+  const [ t ] = useTranslation();
   const [ pages, setPages ] = useState<PageDTO[]>([]);
   const [ selectedPage, setSelectedPage ] = useState<PageDTO>({});
   const [ update, setUpdate ] = useState<boolean>(false);

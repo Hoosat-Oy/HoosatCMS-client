@@ -75,7 +75,7 @@ export const MarkdownEditor: React.FC<markdownEditorProps> = (rest) => {
         { [1,2,3,4,5,6].map(h => (
           <Button 
             key={h}
-            onClick={(e) => {
+            onClick={() => {
               addToTextarea("#".repeat(h) + " header");
           }}>
             H{h}

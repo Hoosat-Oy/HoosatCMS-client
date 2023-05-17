@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArticleDTO, SessionDTO } from '../../@types';
 import { Button, TableBuilder } from '../../HoosatUI';
-import { DeletePost, GetPostsByDomain, PublishPost, UnpublishPost, UpdatePost } from '../../Controllers/Articles';
+import { DeletePost, GetPostsByDomain, PublishPost, UnpublishPost } from '../../Controllers/Articles';
 
 interface ListArticlesProps {
   session: SessionDTO;
@@ -10,7 +10,7 @@ interface ListArticlesProps {
 }
 
 export const ListArticles: React.FC<ListArticlesProps> = (props: ListArticlesProps) => {
-  const [ t, i18n] = useTranslation();
+  const [ t ] = useTranslation();
   const [ posts, setPosts ] = useState<ArticleDTO[]>([]);
   const [ selectedPost, setSelectedPost ] = useState<ArticleDTO>({
     _id: "",
@@ -39,7 +39,7 @@ export const ListArticles: React.FC<ListArticlesProps> = (props: ListArticlesPro
       headers={["HEADER", "PUBLISHED", "UPDATED", "CREATED", "CONTENT", "PUBLISH", "DELETE"]} 
       rows={
         (Array.isArray(posts)) 
-        ? posts.map((post, index, posts) => ({
+        ? posts.map((post) => ({
           _id: (post._id !== undefined) ? post._id : "",
           selected: (selectedPost._id === post._id),
           data: {

@@ -24,7 +24,7 @@ export const Admin = () => {
       const api = process.env.REACT_APP_AUTHENTICATION_API;
       if(api === undefined) {
         console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-        return;
+        return false;
       }
       const result = await fetch(`${api}/authentication/authenticate`, {
         method: "POST",
@@ -51,12 +51,12 @@ export const Admin = () => {
       } else {
         console.log(response.message.message)
       }
+      return true;
     }
   });
 
   const CheckSession = useCallback(() => {
     if(process.env.NODE_ENV === "development") console.log("Checking session");
-    console.log(process.env);
     const localSession = localStorage.getItem("session");
     if (localSession === "null" || localSession === null) {
       return;
