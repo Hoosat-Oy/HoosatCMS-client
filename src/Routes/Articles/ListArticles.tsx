@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArticleDTO, SessionDTO } from '../../@types';
-import { Button, TableBuilder } from '../../HoosatUI';
+import { Button, TableBuilder } from '../../../../HoosatUI';
 import { DeletePost, GetPostsByDomain, PublishPost, UnpublishPost } from '../../Controllers/Articles';
 
 interface ListArticlesProps {

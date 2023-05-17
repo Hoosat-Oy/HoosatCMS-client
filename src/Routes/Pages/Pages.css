@@ -1,4 +1,4 @@
-@import '../../HoosatUI/theme.css';
+@import '../../../../HoosatUI/src/theme.css';
 
 .pages {
   display: grid;

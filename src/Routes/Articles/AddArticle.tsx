@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArticleDTO, SessionDTO } from '../../@types';
-import { FormBuilder } from '../../HoosatUI';
+import { FormBuilder } from '../../../../HoosatUI';
 import { CreatePost } from '../../Controllers/Articles';
 
 interface AddArticleProps {

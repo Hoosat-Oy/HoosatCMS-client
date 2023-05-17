@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, FormBuilder, Heading } from '../../HoosatUI';
+import { Flex, FormBuilder, Heading } from '../../../../HoosatUI';
 
 interface Session {
   token?: string,

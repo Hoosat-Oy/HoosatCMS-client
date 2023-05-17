@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MarkdownDocument, ArticleDTO, SessionDTO } from '../../@types';
-import { Button, Grid, Heading, List, ListItem, PageBuilder } from '../../HoosatUI';
+import { Button, Grid, Heading, List, ListItem, PageBuilder } from '../../../../HoosatUI';
 import { useTranslation } from 'react-i18next';
 import { AddArticle } from './AddArticle';
 import { ListArticles } from './ListArticles';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MarkdownDocument, PageDTO, SessionDTO } from '../../@types';
-import { Button, Flex, Grid, Heading } from '../../HoosatUI';
+import { Button, Flex, Grid, Heading } from '../../../../HoosatUI';
 import { MarkdownEditor } from '../../Components/MarkdownEditor/MarkdownEditor';
 import { useTranslation } from 'react-i18next';
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FormBuilder, iconNames } from '../../HoosatUI';
+import { FormBuilder,  } from '../../../../HoosatUI';
+import { iconNames } from '../../../../HoosatUI/src/Icons/Icons';
 import { useTranslation } from 'react-i18next';
 import { PageDTO, SessionDTO } from '../../@types';
 import { CreatePage } from '../../Controllers/Pages';

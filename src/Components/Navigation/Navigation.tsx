@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {  List, ListItem, Image } from '../../HoosatUI';
+import {  List, ListItem, Image } from '../../../../HoosatUI';
 
 export const Navigation = () => {
   return (
