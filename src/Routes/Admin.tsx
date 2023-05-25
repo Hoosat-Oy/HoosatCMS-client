@@ -31,7 +31,6 @@ export const Admin = () => {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
           'Accept': 'application/json',
-          "Access-Control-Allow-Origin": "http://localhost:3000",
           'Access-Control-Allow-Credentials': 'true'
         },
         body: JSON.stringify({
@@ -73,7 +72,6 @@ export const Admin = () => {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
           'Accept': 'application/json',
-          "Access-Control-Allow-Origin": "http://localhost:3000",
           'Access-Control-Allow-Credentials': 'true',
           "Authorization": parsedSession.token
         },

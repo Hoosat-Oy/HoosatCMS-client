@@ -17,7 +17,6 @@ export const CreatePost = async (session: SessionDTO, article: ArticleDTO) => {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       'Accept': 'application/json',
-      "Access-Control-Allow-Origin": "http://localhost:3000",
       'Access-Control-Allow-Credentials': 'true',
       "Authorization": session.token
     },
@@ -50,7 +49,6 @@ export const UpdatePost = async (session: SessionDTO, article: ArticleDTO) => {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       'Accept': 'application/json',
-      "Access-Control-Allow-Origin": "http://localhost:3000",
       'Access-Control-Allow-Credentials': 'true',
       "Authorization": session.token
     },
@@ -83,7 +81,6 @@ export const PublishPost = async (session: SessionDTO, article: ArticleDTO) => {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       'Accept': 'application/json',
-      "Access-Control-Allow-Origin": "http://localhost:3000",
       'Access-Control-Allow-Credentials': 'true',
       "Authorization": session.token
     },
@@ -116,7 +113,6 @@ export const UnpublishPost = async (session: SessionDTO, article: ArticleDTO) =>
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       'Accept': 'application/json',
-      "Access-Control-Allow-Origin": "http://localhost:3000",
       'Access-Control-Allow-Credentials': 'true',
       "Authorization": session.token
     },
@@ -150,7 +146,6 @@ export const DeletePost = async (session: SessionDTO, article: ArticleDTO) => {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       'Accept': 'application/json',
-      "Access-Control-Allow-Origin": "http://localhost:3000",
       'Access-Control-Allow-Credentials': 'true',
       "Authorization": session.token
     }
@@ -180,7 +175,6 @@ export const GetPostsByDomain = async (session: SessionDTO) => {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       'Accept': 'application/json',
-      "Access-Control-Allow-Origin": "http://localhost:3000",
       'Access-Control-Allow-Credentials': 'true',
       "Authorization": session.token
     }
