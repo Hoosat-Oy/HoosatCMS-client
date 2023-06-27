@@ -4,7 +4,7 @@ import { PageBuilder } from "../../../HoosatUI";
 import { Login } from '../Components/Login/Login';
 import { Navigation as Nav } from "../Components/Navigation/Navigation";
 
-import './Admin.scss';
+import './Admin.css';
 import { Pages } from './Pages/Pages';
 import { SessionDTO } from '../@types';
 import { Articles } from './Articles/Articles';
