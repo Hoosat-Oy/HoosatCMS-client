@@ -1,0 +1,76 @@
+.markdownEditor {
+  width: 100%;
+  max-width: 100%;
+  gap: 1rem;
+  grid-template-columns: 1fr 5fr 5fr;
+  grid-template-areas: "editorHeader editorHeader editorHeader" "editorLabel editorLabel editorLabel" "editorTools editorTextarea editorViewer" "editorActions editorActions editorActions";
+}
+.markdownEditor > .editorHeader {
+  grid-area: editorHeader;
+  display: grid;
+  gap: 1rem;
+}
+.markdownEditor > .editorLabel {
+  grid-area: editorLabel;
+}
+.markdownEditor > .editorLabel > p {
+  padding: 0px;
+  margin: 0px;
+}
+.markdownEditor > .editorTools {
+  grid-area: editorTools;
+  margin-right: -1rem;
+}
+.markdownEditor > .editorTools > button {
+  width: 100%;
+  border-radius: 0rem;
+  border: 0px;
+}
+.markdownEditor > .editorTools > button:first-child {
+  border-top-left-radius: 0.375rem;
+}
+.markdownEditor > .editorTools > button:last-child {
+  border-bottom-left-radius: 0.375rem;
+}
+.markdownEditor > .editorTools > button:hover {
+  outline: none;
+  box-shadow: none;
+}
+.markdownEditor > .editorTools > button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.markdownEditor > .editorTools > button:active {
+  outline: none;
+}
+.markdownEditor > .editorTextarea {
+  padding: 1rem;
+  border-radius: 0.375rem;
+  border-top-left-radius: 0rem !important;
+  border-bottom-left-radius: 0rem !important;
+  grid-area: editorTextarea;
+  min-height: 500px;
+  resize: vertical;
+}
+.markdownEditor > .editorTextarea:hover {
+  outline: none;
+  box-shadow: none;
+}
+.markdownEditor > .editorTextarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+.markdownEditor > .editorTextarea:active {
+  outline: none;
+}
+.markdownEditor > .editorViewer {
+  padding: 1rem;
+  grid-area: editorViewer;
+  min-height: 500px;
+  border-radius: 0.375rem;
+  word-break: break-word;
+  border: 1px solid #767676;
+}
+.markdownEditor > .editorActions {
+  grid-area: editorActions;
+}

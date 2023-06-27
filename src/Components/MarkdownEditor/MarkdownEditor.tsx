@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Button, Grid, GridItem, Input, Paragraph, Markdown } from '../../../../HoosatUI';
 
-import "./MarkdownEditor.scss";
+import "./MarkdownEditor.css";
 
 export interface MarkdownDocument {
   header: string | undefined,
