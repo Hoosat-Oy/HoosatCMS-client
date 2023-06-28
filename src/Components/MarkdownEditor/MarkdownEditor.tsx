@@ -25,15 +25,14 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = (props) => {
   const [undoStack, setUndoStack] = useState<{ value: string, selectionStart: number, selectionEnd: number }[]>([]);
   const [redoStack, setRedoStack] = useState<{ value: string, selectionStart: number, selectionEnd: number }[]>([]);
 
-  const historyIndexRef = useRef<number>(0);
-
   useEffect(() => {
     const textarea = textareaRef.current;
-    if (textarea && props.markdownDocument?.markdown !== textarea.value) {
-      textarea.value = props.markdownDocument?.markdown || '';
+    if (textarea && props.markdownDocument?.markdown !== textarea.defaultValue) {
+      textarea.defaultValue = props.markdownDocument?.markdown || '';
     }
   }, [props.markdownDocument]);
-  
+
+
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.target.value;
   
@@ -47,43 +46,37 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = (props) => {
       return;
     }
   
+    const { selectionStart, selectionEnd } = textarea;
+  
     props.setMarkdownDocument((prevState) => ({
       ...prevState,
       markdown: value,
     }));
-  
-    const { selectionStart, selectionEnd } = textarea;
-    const prevStack = undoStack[historyIndexRef.current - 1];
+    const prevStack = undoStack[undoStack.length - 1];
     if (prevStack && prevStack.value === value) {
       prevStack.selectionStart = selectionStart;
       prevStack.selectionEnd = selectionEnd;
     } else {
-      const updatedStack = [
-        ...undoStack.slice(0, historyIndexRef.current),
+      setUndoStack([
+        ...undoStack,
         {
           value,
           selectionStart,
           selectionEnd,
         },
-        ...undoStack.slice(historyIndexRef.current),
-      ];
-      setUndoStack(updatedStack);
-      historyIndexRef.current++;
+      ]);
     }
   
-    setRedoStack([]); // Clear redo stack
+    setRedoStack([]);
   };
-  
-  
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.ctrlKey) {
-      if (event.key === 'z') {
-        event.preventDefault();
-        undo();
-      } else if (event.key === 'Z' && event.shiftKey) {
-        event.preventDefault();
-        redo();
-      }
+    if (event.ctrlKey && event.shiftKey && event.key === 'Z') {
+      event.preventDefault();
+      redo();
+    } else if (event.ctrlKey && event.key === 'z') {
+      event.preventDefault();
+      undo();
     }
   };
   
@@ -126,92 +119,101 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = (props) => {
       }
   
       const updatedValue =
-        props.markdownDocument.markdown?.substring(0, selectionStart) +
+        textarea.value.substring(0, selectionStart) +
         formattedText +
-        props.markdownDocument.markdown?.substring(selectionEnd);
-  
-      textarea.focus();
-      textarea.value = updatedValue;
-      textarea.selectionStart = selectionStart + formattedText.length;
-      textarea.selectionEnd = selectionStart + formattedText.length;
-  
-      setUndoStack((prevStack) => [
-        ...prevStack,
-        {
-          value: textarea.value,
-          selectionStart: textarea.selectionStart,
-          selectionEnd: textarea.selectionEnd,
-        },
-      ]);
+        textarea.value.substring(selectionEnd);
   
       props.setMarkdownDocument((prevState) => ({
         ...prevState,
         markdown: updatedValue,
       }));
   
-      setRedoStack([]); // Clear redo stack
+      // Store the previous state value and selection positions
+      const previousValue = textarea.value;
+      const previousSelectionStart = selectionStart;
+      const previousSelectionEnd = selectionEnd;
+  
+      setUndoStack((prevStack) => [
+        ...prevStack,
+        {
+          value: previousValue, // Use the stored previous value
+          selectionStart: previousSelectionStart,
+          selectionEnd: previousSelectionEnd,
+        },
+      ]);
+  
+      textarea.focus();
+      textarea.value = updatedValue;
+      textarea.selectionStart = selectionStart + formattedText.length;
+      textarea.selectionEnd = selectionStart + formattedText.length;
+  
+      setRedoStack([]);
     }
   };
-  
-  
+
   const undo = () => {
-    const textarea = textareaRef.current;
-    if (textarea && undoStack.length > 0 && historyIndexRef.current > 0) {
-      historyIndexRef.current--;
-      const previousState = undoStack[historyIndexRef.current];
-      if (previousState) {
-        setRedoStack((prevStack) => [
-          {
-            value: textarea.value,
-            selectionStart: textarea.selectionStart,
-            selectionEnd: textarea.selectionEnd,
-          },
-          ...prevStack,
-        ]);
-        textarea.focus();
-        textarea.value = previousState.value;
-        textarea.selectionStart = previousState.selectionStart;
-        textarea.selectionEnd = previousState.selectionEnd;
-  
-        props.setMarkdownDocument((prevState) => ({
-          ...prevState,
-          markdown: previousState.value,
-        }));
-      }
+    console.log("undo called!");
+    if (undoStack.length === 0) {
+      return;
+    }
+    const previousState = undoStack[undoStack.length - 1];
+    const updatedRedoStack = [
+      {
+        value: previousState.value,
+        selectionStart: previousState.selectionStart,
+        selectionEnd: previousState.selectionEnd,
+      },
+      ...redoStack,
+    ];
+    const updatedUndoStack = undoStack.slice(0, undoStack.length - 1);
+    setUndoStack(updatedUndoStack);
+    setRedoStack(updatedRedoStack);
+    if (updatedUndoStack.length > 0) {
+      const stack = updatedUndoStack[updatedUndoStack.length - 1];
+      props.setMarkdownDocument((prevState) => ({
+        ...prevState,
+        markdown: stack.value,
+      }));
+    } else {
+      props.setMarkdownDocument((prevState) => ({
+        ...prevState,
+        markdown: '', // Set the markdown value to an appropriate default value when undoStack is empty
+      }));
     }
   };
   
   const redo = () => {
+    if (redoStack.length === 0) {
+      return;
+    }
+
+    const nextState = redoStack[0];
+    const updatedUndoStack = [
+      ...undoStack,
+      {
+        value: nextState?.value || '',
+        selectionStart: nextState?.selectionStart || 0,
+        selectionEnd: nextState?.selectionEnd || 0,
+      },
+    ];
+    const updatedRedoStack = redoStack.slice(1);
+
+    setUndoStack(updatedUndoStack);
+    setRedoStack(updatedRedoStack);
+
+    props.setMarkdownDocument((prevState) => ({
+      ...prevState,
+      markdown: nextState?.value || '',
+    }));
+
     const textarea = textareaRef.current;
-    if (textarea && redoStack.length > 0) {
-      historyIndexRef.current++;
-      const nextState = redoStack[0];
-      if (nextState) {
-        setUndoStack((prevStack) => [
-          ...prevStack,
-          {
-            value: textarea.value,
-            selectionStart: textarea.selectionStart,
-            selectionEnd: textarea.selectionEnd,
-          },
-        ]);
-        textarea.focus();
-        textarea.value = nextState.value;
-        textarea.selectionStart = nextState.selectionStart;
-        textarea.selectionEnd = nextState.selectionEnd;
-  
-        props.setMarkdownDocument((prevState) => ({
-          ...prevState,
-          markdown: nextState.value,
-        }));
-  
-        setRedoStack((prevStack) => prevStack.slice(1));
-      }
+    if (textarea) {
+      textarea.value = nextState?.value || '';
+      textarea.selectionStart = nextState?.selectionStart || 0;
+      textarea.selectionEnd = nextState?.selectionEnd || 0;
+      textarea.focus();
     }
   };
-  
-  
-  
 
   return (
     <Grid className="markdownEditor">
@@ -241,74 +243,24 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = (props) => {
             H{h}
           </Button>
         ))}
-        <Button
-          onClick={() => {
-            addToTextarea('**BOLD**');
-          }}
-        >
-          Bold
-        </Button>
-        <Button
-          onClick={() => {
-            addToTextarea('*ITALIC*');
-          }}
-        >
-          Italic
-        </Button>
-        <Button
-          onClick={() => {
-            addToTextarea('***BOLD ITALIC***');
-          }}
-        >
+        <Button onClick={() => addToTextarea('**BOLD**')}>Bold</Button>
+        <Button onClick={() => addToTextarea('*ITALIC*')}>Italic</Button>
+        <Button onClick={() => addToTextarea('***BOLD ITALIC***')}>
           Bold Italic
         </Button>
-        <Button
-          onClick={() => {
-            addToTextarea('~~Strikethrough~~');
-          }}
-        >
+        <Button onClick={() => addToTextarea('~~Strikethrough~~')}>
           Strikethrough
         </Button>
-        <Button
-          onClick={() => {
-            addToTextarea('> Quote');
-          }}
-        >
-          Quote
-        </Button>
-        <Button
-          onClick={() => {
-            addToTextarea('```\r\n\r\n```\r\n');
-          }}
-        >
+        <Button onClick={() => addToTextarea('> Quote')}>Quote</Button>
+        <Button onClick={() => addToTextarea('```\r\n\r\n```\r\n')}>
           Code
         </Button>
-        <Button
-          onClick={() => {
-            addToTextarea('| Th | Th |\r\n|----|----|\r\n| Td | Td |');
-          }}
-        >
+        <Button onClick={() => addToTextarea('| Th | Th |\r\n|----|----|\r\n| Td | Td |')}>
           Table
         </Button>
-        <Button
-          onClick={() => {
-            addToTextarea('| Td | Td |');
-          }}
-        >
-          Row
-        </Button>
-        <Button
-          onClick={() => {
-            addToTextarea('[text](url)');
-          }}
-        >
-          Link
-        </Button>
-        <Button
-          onClick={() => {
-            addToTextarea('![ALT](https://hoosat.fi/logo512.png)');
-          }}
-        >
+        <Button onClick={() => addToTextarea('| Td | Td |')}>Row</Button>
+        <Button onClick={() => addToTextarea('[text](url)')}>Link</Button>
+        <Button onClick={() => addToTextarea('![ALT](https://hoosat.fi/logo512.png)')}>
           Image
         </Button>
       </GridItem>
@@ -324,9 +276,7 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = (props) => {
         className="editorViewer"
         markdown={props.markdownDocument?.markdown || ''}
       />
-      <GridItem className="editorActions">
-        {props.actions}
-      </GridItem>
+      <GridItem className="editorActions">{props.actions}</GridItem>
     </Grid>
   );
 };
