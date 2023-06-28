@@ -108,6 +108,8 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = (props) => {
         formattedText = `**${selectedText}**`;
       } else if (element === '*ITALIC*') {
         formattedText = `*${selectedText}*`;
+      } else if (element === '***BOLD ITALIC***') {
+        formattedText = `***${selectedText}***`;
       } else if (element === '~~Strikethrough~~') {
         formattedText = `~~${selectedText}~~`;
       } else if (element === '> Quote') {
