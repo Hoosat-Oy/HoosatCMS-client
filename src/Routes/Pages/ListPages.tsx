@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, Grid, Icons, Input, TableBuilder } from '../../../../HoosatUI';
+import { Button, Grid, Icon, Input, TableBuilder } from '../../../../HoosatUI';
 import { PageDTO, SessionDTO } from '../../@types';
 import { useTranslation } from 'react-i18next';
 import { GetPagesByDomain, DeletePage, MovePageDown, MovePageUp, UpdatePage } from '../../Controllers/Pages';
@@ -36,14 +36,14 @@ export const ListPages: React.FC<ListPagesProps> = (props: ListPagesProps) => {
             <Button onClick={async () => {
               await MovePageUp(props.session, index, pages);
               setUpdate(!update)
-            }}><Icons icon={'arrow-up'} type={'outline'} style={{ width: "16px"}}/></Button>
+            }}><Icon name='arrow-up' style={{ width: "16pt", height: "16pt", fill: "#fff"}}/></Button>
             {page.order}
             <Button onClick={async () => {
               await MovePageDown(props.session, index, pages);
               setUpdate(!update)
-            }}><Icons icon={'arrow-down'} type={'outline'} style={{ width: "16px"}}/></Button>
+            }}><Icon name='arrow-down' style={{ width: "16pt", height: "16pt", fill: "#fff"}}/></Button>
           </Grid>,
-          icon: <Icons icon={(page.icon !== undefined) ? page.icon : ""} type={'outline'} style={{ width: "24px"}}></Icons>,
+          icon: <Icon name={(page.icon !== undefined) ? page.icon : ""} style={{ width: "16pt", height: "16pt" }} />,
           // name: page.name,
           name: <Input type="text" value={page.name} onChange={(e) => {
             setPages(pages.map((p, i) => {
