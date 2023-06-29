@@ -11,6 +11,12 @@
     "content";  
 }
 
+.Input {
+  margin-top: 0px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 .pages > .header {
   grid-area: header;
 }

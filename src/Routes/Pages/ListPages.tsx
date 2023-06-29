@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, Grid, Icon, Input, TableBuilder } from '../../../../HoosatUI';
+import { Button, Grid, Icon, Input, TableBuilder, Combobox, iconNames } from '../../../../HoosatUI';
 import { PageDTO, SessionDTO } from '../../@types';
 import { useTranslation } from 'react-i18next';
 import { GetPagesByDomain, DeletePage, MovePageDown, MovePageUp, UpdatePage } from '../../Controllers/Pages';
@@ -37,15 +37,31 @@ export const ListPages: React.FC<ListPagesProps> = (props: ListPagesProps) => {
               await MovePageUp(props.session, index, pages);
               setUpdate(!update)
             }}><Icon name='arrow-up' style={{ width: "16pt", height: "16pt", fill: "#fff"}}/></Button>
-            {page.order}
+            <div style={{marginTop: "15px"}}>{page.order}</div>
             <Button onClick={async () => {
               await MovePageDown(props.session, index, pages);
               setUpdate(!update)
             }}><Icon name='arrow-down' style={{ width: "16pt", height: "16pt", fill: "#fff"}}/></Button>
           </Grid>,
-          icon: <Icon name={(page.icon !== undefined) ? page.icon : ""} style={{ width: "16pt", height: "16pt" }} />,
+          // icon: <Icon name={(page.icon !== undefined) ? page.icon : ""} style={{ width: "16pt", height: "16pt" }} />,
+          icon: <div style={{ display: 'flex', alignItems: 'center', gap: "10px", justifyContent: "space-around", marginLeft: "15px", marginRight: "15px" }}>
+            <Icon name={(page.icon !== undefined) ? page.icon : ""} style={{ width: "16pt", height: "16pt" }} />
+            <Combobox
+              id='icon'
+              options={iconNames}
+              multiple={false}
+              search="true"
+              onSelect={(e: React.BaseSyntheticEvent) => {
+                setPages(pages.map((p, i) => {
+                  if(i === index) {
+                    p.icon = e.target.value;
+                  }
+                  return p;
+                }))
+              }} />
+          </div>,
           // name: page.name,
-          name: <Input type="text" value={page.name} onChange={(e) => {
+          name: <Input type="text" value={page.name} onChange={(e: React.BaseSyntheticEvent) => {
             setPages(pages.map((p, i) => {
               if(i === index) {
                 p.name = e.target.value;
@@ -54,7 +70,7 @@ export const ListPages: React.FC<ListPagesProps> = (props: ListPagesProps) => {
             }))
           }}/>,
           // link: page.link,
-          link: <Input type="text" value={page.link} onChange={(e) => {
+          link: <Input type="text" value={page.link} onChange={(e: React.BaseSyntheticEvent) => {
             setPages(pages.map((p, i) => {
               if(i === index) {
                 p.link = e.target.value;
