@@ -21,6 +21,11 @@ export interface PageDTO {
   updatedAt?: Date,
 }
 
+export interface FilesDTO {
+  domain?: string;
+  files: File[]; // Add a 'file' property of type 'File' to represent the uploaded file
+}
+
 export interface ArticleDTO {
   _id: string;
   group?: string;

@@ -8,6 +8,7 @@ import './Admin.css';
 import { Pages } from './Pages/Pages';
 import { SessionDTO } from '../@types';
 import { Articles } from './Articles/Articles';
+import { Files } from './Files/Files';
 
 
 
@@ -108,6 +109,8 @@ export const Admin = () => {
             ? <Pages session={session}></Pages>
             : (location.pathname === "/hoosatcms/articles")
             ? <Articles session={session}></Articles>
+            : (location.pathname === "/hoosatcms/files")
+            ? <Files session={session}></Files>
             : <></>
           }
           footer={<div></div>} 
