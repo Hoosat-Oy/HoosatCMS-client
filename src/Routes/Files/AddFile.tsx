@@ -34,7 +34,7 @@ export const AddFile: React.FC<AddFileProps> = (props: AddFileProps) => {
           id: 'file',
           label: `${t('files.add-file-input')}`,
           type: 'file',
-          multiple: 'true',
+          multiple: true,
           onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
             if (e.target.files && e.target.files.length > 0) {
               setFiles(Array.from(e.target.files));

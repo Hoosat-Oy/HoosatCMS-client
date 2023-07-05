@@ -51,6 +51,7 @@ export const ListPages: React.FC<ListPagesProps> = (props: ListPagesProps) => {
               options={iconNames}
               multiple={false}
               search="true"
+              autoComplete='off'
               onSelect={(e: React.BaseSyntheticEvent) => {
                 setPages(pages.map((p, i) => {
                   if(i === index) {
