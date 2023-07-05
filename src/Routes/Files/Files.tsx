@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { PageDTO, SessionDTO } from '../../@types';
-import { Button, Grid, Heading, List, ListItem, PageBuilder } from '../../../../HoosatUI';
+import { SessionDTO } from '../../@types';
+import { Button, Heading, List, ListItem, PageBuilder } from '../../../../HoosatUI';
 
 import "./Files.css";
 import { AddFile } from './AddFile';
