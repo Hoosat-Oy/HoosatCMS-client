@@ -64,7 +64,7 @@ export const ListFiles: React.FC<ListFilesProps> = (props: ListFilesProps) => {
               }}></Image> 
               : <Icon name={'document'} style={{ width: "100px", height: "100px" }}></Icon>,
             filename: file.originalFilename,
-            publicpath: <a href={file.filepath?.replace("./build/public/", "/")!}>{file.filepath?.replace("./build/public/", "/")}</a>,
+            publicpath: <a href={file.filepath?.replace("./build/public/", "/")!}>{encodeURI(file.filepath?.replace("./build/public/", "/")!)}</a>,
             delete: <Button onClick={async () => {
               setSelectedPage(file);
               await DeleteFile(props.session, file);
