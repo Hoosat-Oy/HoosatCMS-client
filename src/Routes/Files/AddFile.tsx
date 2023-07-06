@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormBuilder } from '../../../../HoosatUI';
 import { useTranslation } from 'react-i18next';
-import { SessionDTO, FilesDTO } from '../../@types';
+import { SessionDTO, UploadsDTO } from '../../@types';
 import { UploadFile } from '../../Controllers/Files'; // Import the FileDTO interface
 
 interface AddFileProps {
@@ -15,7 +15,7 @@ export const AddFile: React.FC<AddFileProps> = (props: AddFileProps) => {
 
   const handleSubmit = async () => {
     if (files) {
-      const file: FilesDTO = {
+      const file: UploadsDTO = {
         files: files
       };
 

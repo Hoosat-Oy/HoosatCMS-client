@@ -5,6 +5,7 @@ import { Button, Heading, List, ListItem, PageBuilder } from '../../../../Hoosat
 
 import "./Files.css";
 import { AddFile } from './AddFile';
+import { ListFiles } from './ListFiles';
 
 interface FilesProps {
   session: SessionDTO;
@@ -12,7 +13,7 @@ interface FilesProps {
 
 export const Files: React.FC<FilesProps> = (props: FilesProps) => {
   const [ t, ] = useTranslation();
-  const [ currentComponent, setCurrentComponent] = useState<string>("files.add");
+  const [ currentComponent, setCurrentComponent] = useState<string>("files.list");
   
 
   return (
@@ -37,6 +38,10 @@ export const Files: React.FC<FilesProps> = (props: FilesProps) => {
             closeComponent={() => {
               setCurrentComponent("files.list")
             }}
+          />
+        : (currentComponent === "files.list") 
+        ? <ListFiles 
+            session={props.session} 
           />
         : <></>       
       }
