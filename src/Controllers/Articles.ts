@@ -159,15 +159,15 @@ export const DeletePost = async (session: SessionDTO, article: ArticleDTO) => {
   }
 }
 
-export const GetPostsByDomain = async (session: SessionDTO) => {
+export const GetPostsByDomain = async (session: SessionDTO): Promise<ArticleDTO[]> => {
   if(session.token === undefined) {
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
-    return;
+    return {} as ArticleDTO[];
   }
   const api = process.env.REACT_APP_AUTHENTICATION_API;
   if(api === undefined) {
     if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return;
+    return {} as ArticleDTO[];
   }
   const uri = `${api}/articles/domain/${window.location.hostname}`;
   const fetchResult = await fetch(uri, {
@@ -184,6 +184,6 @@ export const GetPostsByDomain = async (session: SessionDTO) => {
   if(response.result === "success") {
     return response.articles;
   } else {
-    return false;
+    return {} as ArticleDTO[];
   }
 }
