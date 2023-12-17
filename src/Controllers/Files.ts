@@ -8,13 +8,7 @@ export const UploadFile = async (session: SessionDTO, file: UploadsDTO) => {
       console.log("session.token was undefined, cannot continue uploading files.");
     return;
   }
-  const api = process.env.REACT_APP_AUTHENTICATION_API;
-  if (api === undefined) {
-    if (process.env.NODE_ENV === "development")
-      console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return;
-  }
-  const uri = `${api}/files/`;
+  const uri = `/api/files/`;
   const formData = new FormData();
   file.files.forEach((file, index) => {
     formData.append(`file[${index}]`, file); // Append each file to the FormData with a unique key
@@ -43,13 +37,7 @@ export const GetFilesByDomain = async (session: SessionDTO): Promise<FilesDTO[]>
       console.log("session.token was undefined, cannot continue uploading files.");
     return [];
   }
-  const api = process.env.REACT_APP_AUTHENTICATION_API;
-  if (api === undefined) {
-    if (process.env.NODE_ENV === "development")
-      console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return [];
-  }
-  const uri = `${api}/files/domain/${domain}`;
+  const uri = `/api/files/domain/${domain}`;
   const fetchResult = await fetch(uri, {
     method: "GET",
     headers: {
@@ -71,13 +59,7 @@ export const DeleteFile = async (session: SessionDTO, file: FilesDTO): Promise<b
       console.log("session.token was undefined, cannot continue uploading files.");
     return false;
   }
-  const api = process.env.REACT_APP_AUTHENTICATION_API;
-  if (api === undefined) {
-    if (process.env.NODE_ENV === "development")
-      console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return false;
-  }
-  const uri = `${api}/files/${file._id}`;
+  const uri = `/api/files/${file._id}`;
   const fetchResult = await fetch(uri, {
     method: "DELETE",
     headers: {

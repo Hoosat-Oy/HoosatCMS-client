@@ -6,12 +6,7 @@ export const CreatePage = async (session: SessionDTO, page: PageDTO) => {
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
     return;
   }
-  const api = process.env.REACT_APP_AUTHENTICATION_API;
-  if(api === undefined) {
-    if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return;
-  }
-  const uri = `${api}/pages/`;
+  const uri = `/api/pages/`;
   const fetchResult = await fetch(uri, {
     method: "POST",
     headers: {
@@ -38,12 +33,7 @@ export const GetPagesByDomain = async (session: SessionDTO, ) => {
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
     return;
   }
-  const api = process.env.REACT_APP_AUTHENTICATION_API;
-  if(api === undefined) {
-    if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return;
-  }
-  const uri = `${api}/pages/domain/${window.location.hostname}`;
+  const uri = `/api/pages/domain/${window.location.hostname}`;
   const fetchResult = await fetch(uri, {
     method: "GET",
     headers: {
@@ -66,12 +56,7 @@ export const UpdatePage = async (session: SessionDTO, page: PageDTO) => {
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
     return;
   }
-  const api = process.env.REACT_APP_AUTHENTICATION_API;
-  if(api === undefined) {
-    if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return;
-  }
-  const uri = `${api}/pages/`;
+  const uri = `/api/pages/`;
   const fetchResult = await fetch(uri, {
     method: "PUT",
     headers: {
@@ -98,12 +83,7 @@ export const DeletePage = async (session: SessionDTO, page: PageDTO) => {
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
     return;
   }
-  const api = process.env.REACT_APP_AUTHENTICATION_API;
-  if(api === undefined) {
-    if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return;
-  }
-  const uri = `${api}/pages/${page._id}`;
+  const uri = `/api/pages/${page._id}`;
   const fetchResult = await fetch(uri, {
     method: "DELETE",
     headers: {

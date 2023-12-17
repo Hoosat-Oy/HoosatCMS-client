@@ -22,12 +22,7 @@ export const Admin = () => {
         return false;
       }
       const params = { email: email, password: password }
-      const api = process.env.REACT_APP_AUTHENTICATION_API;
-      if(api === undefined) {
-        console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-        return false;
-      }
-      const result = await fetch(`${api}/authentication/authenticate`, {
+      const result = await fetch(`/api/authentication/authenticate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -63,12 +58,7 @@ export const Admin = () => {
     }
     const parsedSession = JSON.parse(localSession);
     const confirmSession = async () => {
-      const api = process.env.REACT_APP_AUTHENTICATION_API;
-      if(api === undefined) {
-        console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-        return;
-      }
-      const result = await fetch(`${api}/authentication/confirm`, {
+      const result = await fetch(`/api/authentication/confirm`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json; charset=utf-8",

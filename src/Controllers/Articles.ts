@@ -6,12 +6,7 @@ export const CreatePost = async (session: SessionDTO, article: ArticleDTO) => {
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
     return;
   }
-  const api = process.env.REACT_APP_AUTHENTICATION_API;
-  if(api === undefined) {
-    if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return;
-  }
-  const uri = `${api}/articles/`;
+  const uri = `/api/articles/`;
   const fetchResult = await fetch(uri, {
     method: "POST",
     headers: {
@@ -38,12 +33,7 @@ export const UpdatePost = async (session: SessionDTO, article: ArticleDTO) => {
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
     return;
   }
-  const api = process.env.REACT_APP_AUTHENTICATION_API;
-  if(api === undefined) {
-    if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return;
-  }
-  const uri = `${api}/articles/`;
+  const uri = `/api/articles/`;
   const fetchResult = await fetch(uri, {
     method: "PUT",
     headers: {
@@ -70,12 +60,7 @@ export const PublishPost = async (session: SessionDTO, article: ArticleDTO) => {
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
     return;
   }
-  const api = process.env.REACT_APP_AUTHENTICATION_API;
-  if(api === undefined) {
-    if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return;
-  }
-  const uri = `${api}/articles/publish`;
+  const uri = `/api/articles/publish`;
   const fetchResult = await fetch(uri, {
     method: "PUT",
     headers: {
@@ -102,12 +87,7 @@ export const UnpublishPost = async (session: SessionDTO, article: ArticleDTO) =>
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
     return;
   }
-  const api = process.env.REACT_APP_AUTHENTICATION_API;
-  if(api === undefined) {
-    if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return;
-  }
-  const uri = `${api}/articles/unpublish`;
+  const uri = `/api/articles/unpublish`;
   const fetchResult = await fetch(uri, {
     method: "PUT",
     headers: {
@@ -135,12 +115,7 @@ export const DeletePost = async (session: SessionDTO, article: ArticleDTO) => {
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
     return;
   }
-  const api = process.env.REACT_APP_AUTHENTICATION_API;
-  if(api === undefined) {
-    if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return;
-  }
-  const uri = `${api}/articles/${article._id}`;
+  const uri = `/api/articles/${article._id}`;
   const fetchResult = await fetch(uri, {
     method: "DELETE",
     headers: {
@@ -164,12 +139,7 @@ export const GetPostsByDomain = async (session: SessionDTO): Promise<ArticleDTO[
     if(process.env.NODE_ENV === "development") console.log("session.token was undefined, can not continue creating page.");
     return {} as ArticleDTO[];
   }
-  const api = process.env.REACT_APP_AUTHENTICATION_API;
-  if(api === undefined) {
-    if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
-    return {} as ArticleDTO[];
-  }
-  const uri = `${api}/articles/domain/${window.location.hostname}`;
+  const uri = `/api/articles/domain/${window.location.hostname}`;
   const fetchResult = await fetch(uri, {
     method: "GET",
     headers: {
