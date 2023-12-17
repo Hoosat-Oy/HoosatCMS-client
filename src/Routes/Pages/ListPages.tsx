@@ -31,6 +31,7 @@ export const ListPages: React.FC<ListPagesProps> = (props: ListPagesProps) => {
       rows={(pages !== undefined) ? pages.map((page, index, pages) => ({
         _id: (page._id !== undefined) ? page._id : "",
         selected: (selectedPage._id === page._id),
+        color: "white",
         data: {
           order: <Grid className='order-buttons'>
             <Button onClick={async () => {

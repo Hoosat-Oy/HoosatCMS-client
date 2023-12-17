@@ -42,6 +42,7 @@ export const ListArticles: React.FC<ListArticlesProps> = (props: ListArticlesPro
         ? posts.map((post) => ({
           _id: (post._id !== undefined) ? post._id : "",
           selected: (selectedPost._id === post._id),
+          color: "white",
           data: {
             header: post.header,
             publishedAt: (post.publishedAt && new Date(post.publishedAt).getFullYear() !== 1970) ? (new Date(post.publishedAt)).toLocaleString() : "NOT PUBLISHED",

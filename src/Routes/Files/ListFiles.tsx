@@ -56,6 +56,7 @@ export const ListFiles: React.FC<ListFilesProps> = (props: ListFilesProps) => {
         rows={(files !== undefined && Array.isArray(files)) ? files.map((file, _index, _files) => ({
           _id: (file._id !== undefined) ? file._id : "",
           selected: (selectedPage._id === file._id),
+          color: "white",
           data: {
             // name: file.name,
             picture: (checkIfImage(file.newFilename!) === true) 
